@@ -10,5 +10,8 @@ package ca.qc.bdeb.prog2.tp2.Spécimen;
  * @author Nicolas
  */
 public class Spécimen {
+    //Numero de transaction unique ?? À intégrer  plus tard
+     protected String dateObservation;
+     protected int quantiéObservé;
     
 }

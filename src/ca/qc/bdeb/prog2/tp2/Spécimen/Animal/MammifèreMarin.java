@@ -9,6 +9,6 @@ package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
  *
  * @author Nicolas
  */
-public class MammifèreMarin {
+public class MammifèreMarin extends Animal{
     
 }

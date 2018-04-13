@@ -9,6 +9,7 @@ package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
  *
  * @author Nicolas
  */
-public class Poisson {
+public class Poisson extends Animal{
+    
     
 }

@@ -5,10 +5,22 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
+import ca.qc.bdeb.prog2.tp2.Spécimen.Spécimen;
+
 /**
  *
  * @author Nicolas
  */
-public class Animal {
-    
+public class Animal extends Spécimen {
+    public enum Sexe{
+        MALE,
+        FEMELLE;
+    }
+    public enum Eau{
+        SALÉ,
+        DOUCE;
+    }
+    protected Sexe sexe;
+    protected Eau eau;
+   
 }

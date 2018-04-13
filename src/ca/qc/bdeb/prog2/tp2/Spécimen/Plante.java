@@ -9,6 +9,6 @@ package ca.qc.bdeb.prog2.tp2.Spécimen;
  *
  * @author Nicolas
  */
-public class Plante {
+public class Plante extends Spécimen{
     
 }

@@ -9,6 +9,6 @@ package ca.qc.bdeb.prog2.tp2.Spécimen;
  *
  * @author Nicolas
  */
-public class Minéral {
+public class Minéral extends Spécimen {
     
 }
