@@ -27,8 +27,9 @@ public class main {
         erreur=demanderIdentité();
         
         if(erreur){
-            //Créer objet GestionPokedex
-            //Caller le menu
+            GestionPokedex pokedex=new GestionPokedex(); //Créer un pokedex
+            pokedex.afficherMenu(); //Call le menu
+            
         }else if(!erreur){
             System.out.println("Vous avez échoué vos 3 tentatives!");
             System.exit(0);

@@ -23,4 +23,5 @@ public class Animal extends Spécimen {
     protected Sexe sexe;
     protected Eau eau;
    
+    //Faire méthode abstraire cri
 }
