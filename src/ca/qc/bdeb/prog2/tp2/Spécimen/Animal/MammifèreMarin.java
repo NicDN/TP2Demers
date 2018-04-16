@@ -10,5 +10,14 @@ package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
  * @author Nicolas
  */
 public class MammifèreMarin extends Animal{
+
+    @Override
+    public void cri() {
+        
+    }
     
+    public enum Diette{
+    CARNIVORE,VÉGÉTARIEN;
+}
+    private Diette diette;
 }

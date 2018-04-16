@@ -10,6 +10,11 @@ package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
  * @author Nicolas
  */
 public class Poisson extends Animal{
+
+    @Override
+    public void cri() {
+        System.out.println("Un poission n'a pas de cri");
+    }
     
     
 }

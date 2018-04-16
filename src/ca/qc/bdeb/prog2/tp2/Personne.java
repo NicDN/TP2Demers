@@ -10,10 +10,9 @@ package ca.qc.bdeb.prog2.tp2;
  * @author Nicolas
  */
 public class Personne {
-    private String nom;
-    private String codeAcces;
-    private String mdp;
+    private String nom,codeAcces,mdp;
     private int age;
+private static int nbEntrées; 
 
     public Personne(String nom, String codeAcces, String mdp, int age) {
         this.nom = nom;

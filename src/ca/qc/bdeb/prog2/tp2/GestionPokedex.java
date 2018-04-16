@@ -13,36 +13,98 @@ import java.util.Scanner;
  */
 public class GestionPokedex {
 
+    Scanner clavier = new Scanner(System.in);
+    int choix;
     //La classe Doit contenir une liste d'entrées, besoin de plus d'Explication. 
     //On a déjà fait une liste de toutes le entrées dans la classe spécimen...
-    
-    
-    public static void afficherMenu() {
-        Scanner clavier = new Scanner(System.in);
-        int choix;
+
+    public void afficherMenu() {
+
         System.out.println("Sassissez une des options suivantes:\n");
         System.out.println("1- Consulter les spécimens déjà saisis\n2- Saisir "
                 + "un nouveau spécimen\n3- Modifier un spécimen\n4- Statistiques"
                 + "\n5- Quitter");
+
         choix = Integer.parseInt(clavier.nextLine());
         //Il faudra Gérer exception+bon chiffre parmi ceux demandés
         optionMenu(choix);
     }
 
-    private static void optionMenu(int choix) {
+    private void optionMenu(int choix) {
         switch (choix) {
             case 1:
                 break;
             case 2:
                 break;
             case 3:
+                sousMenuModifier();
                 break;
             case 4:
+                statistiques();
                 break;
             case 5:
+                quitter();
                 break;
 
         }
+    }
+
+    private void sousMenuModifier() {
+        System.out.println("1-Supprimer un spécimen\n2-Modifier la quantité "
+                + "aperçue d'un spécimen donné\n3-Retourner au menu principal");
+        choix = Integer.parseInt(clavier.nextLine());
+        //Il faudra Gérer exception+bon chiffre parmi ceux demandés
+        optionMenuModifier(choix);
+    }
+
+    private void optionMenuModifier(int choix) {
+        switch (choix) {
+            case 1:
+                supprimerSpecimen();
+                break;
+            case 2:
+                modifierQuantitéApercu();
+                break;
+            case 3:
+                afficherMenu();
+                break;
+
+        }
+    }
+
+    private void supprimerSpecimen() {
+        
+    }
+
+    private void modifierQuantitéApercu() {
+        
+    }
+
+    private void statistiques() {
+        afficherNbEntréesTypes();
+        afficherNbEntréesPersonnes();
+        afficherInfosPersonnes();
+    }
+
+    private void afficherNbEntréesTypes() {
+        
+    }
+
+    private void afficherNbEntréesPersonnes() {
+        
+    }
+
+    private void afficherInfosPersonnes() {
+        
+    }
+
+    private void quitter() {
+                sauvegarderFichierPokedex();
+                System.exit(choix);
+    }
+
+    private void sauvegarderFichierPokedex() {
+       //Utiliser serialization pour sauvegarder les informations.
     }
 
 }
