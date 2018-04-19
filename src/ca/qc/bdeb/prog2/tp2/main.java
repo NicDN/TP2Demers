@@ -5,12 +5,16 @@
  */
 package ca.qc.bdeb.prog2.tp2;
 
+import ca.qc.bdeb.prog2.tp2.Spécimen.Spécimen;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,14 +22,10 @@ import java.io.ObjectOutputStream;
  */
 public class main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        boolean erreur = false;
+        ArrayList<Spécimen> listeSpécimen = new ArrayList();
 
-        charcherListePersonnes();
-        chargerFichierPokedex();
+        boolean erreur = false;
 
         erreur = demanderIdentité();
 
@@ -40,14 +40,29 @@ public class main {
 
     }
 
-    public static void charcherListePersonnes() {
+    public static void charcherListePersonnes(String fichier) throws IOException {
+        String codeAcces = null;
+        String mdp = null;
+        String nom = null;
+        String age = null;
+        BufferedReader lecture = null;
+        try {
+            lecture = new BufferedReader(new FileReader(fichier));
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+        } catch (IOException e) {
+            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
+        }
+        String ligne = lecture.readLine();
 
-    }
-
-    public static void chargerFichierPokedex() {
-//        Va charger le contenu du fichier et le mettre dans la liste de spécimen?? À vérifier
-//        Si fichier inexistant, on va devoir catcher filenotfound et ensuite créer
-
+        while (ligne != null) {
+            String[] contenuLigne = ligne.split(";");
+            contenuLigne[0] = codeAcces;
+            contenuLigne[1] = mdp;
+            contenuLigne[2] = nom;
+           
+            //Personne personne=new Personne();
+        }
 
     }
 
@@ -57,27 +72,33 @@ public class main {
         return vérifier;
     }
 
-    public static void ouvertureFichierTexte(String fichier) {
-        // Va créer les personnes à partir du fichier texte
-        // Gère les exeptions aussi
+    public void chargerFichierPokedex(String fichier, ArrayList<Spécimen> listeSpécimen) throws ClassNotFoundException {
         try {
-            BufferedReader lecture = new BufferedReader(new FileReader(fichier));
+            FileInputStream fos = new FileInputStream(fichier);
+            ObjectInputStream oos = new ObjectInputStream(fos);
+            listeSpécimen = (ArrayList<Spécimen>) oos.readObject();
+            System.out.println("Fichier chargé");
+            oos.close();
         } catch (FileNotFoundException e) {
             System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
     }
-    
-    public static void ouvertureFichierBinaire(String fichier){
-        try{
-            FileOutputStream fos=new FileOutputStream(fichier);
-            ObjectOutputStream oos=new ObjectOutputStream(fos);
-            
-        }catch (FileNotFoundException e) {
+
+    public void sauvegarderFichierPokedex(String fichier, ArrayList<Spécimen> listeSpécimen) {
+        try {
+            FileOutputStream fos = new FileOutputStream(fichier);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listeSpécimen);
+            oos.flush();
+            oos.close();
+            System.out.println("Fichier sauvegardé");
+        } catch (FileNotFoundException e) {
             System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
     }
+
 }

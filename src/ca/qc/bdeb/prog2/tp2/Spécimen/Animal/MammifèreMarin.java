@@ -13,7 +13,7 @@ public class MammifèreMarin extends Animal{
 
     @Override
     public void cri() {
-        
+       
     }
     
     public enum Diette{

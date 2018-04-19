@@ -17,7 +17,7 @@ public abstract class Spécimen implements Serializable {
 
     private static int numTransac=0;
 
-    ArrayList<Spécimen> listeSpécimen = new ArrayList<>();
+    
 
     protected String dateObservation, nom, couleur;
     protected int quantiéObservé, taille;
