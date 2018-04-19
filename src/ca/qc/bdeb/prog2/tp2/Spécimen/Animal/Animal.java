@@ -11,7 +11,7 @@ import ca.qc.bdeb.prog2.tp2.Spécimen.Spécimen;
  *
  * @author Nicolas
  */
-public abstract class Animal extends Spécimen {
+public abstract class Animal{
     
     public enum Sexe{
         MALE,
