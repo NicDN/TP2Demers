@@ -19,6 +19,10 @@ public class Poisson extends Animal{
         super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille, observateur);
         this.estDansEauSalee = estDansEauSalee;
     }
+
+    public boolean isEstDansEauSalee() {
+        return estDansEauSalee;
+    }
     
     
 }

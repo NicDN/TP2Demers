@@ -31,9 +31,57 @@ public abstract class Spécimen implements Serializable {
         numTransac++;
     }
 
+    public String getCouleur() {
+        return couleur;
+    }
 
-    
-    
-    
+    public String getDateObservation() {
+        return dateObservation;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public static int getNumTransac() {
+        return numTransac;
+    }
+
+    public Personne getObservateur() {
+        return observateur;
+    }
+
+    public int getQuantiéObservé() {
+        return quantiéObservé;
+    }
+
+    public double getTaille() {
+        return taille;
+    }
+
+    public void setCouleur(String couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setDateObservation(String dateObservation) {
+        this.dateObservation = dateObservation;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setObservateur(Personne observateur) {
+        this.observateur = observateur;
+    }
+
+    public void setQuantiéObservé(int quantiéObservé) {
+        this.quantiéObservé = quantiéObservé;
+    }
+
+    public void setTaille(double taille) {
+        this.taille = taille;
+    }
+
 
 }

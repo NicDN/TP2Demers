@@ -26,4 +26,14 @@ public abstract class Animal extends Spécimen{
     public void cri(){
         System.out.println("Le cris de l'animal "+nom+" est "+cri);
     }
+
+    public boolean isEstMale() {
+        return estMale;
+    }
+
+    public String getCri() {
+        return cri;
+    }
+    
+    
 }

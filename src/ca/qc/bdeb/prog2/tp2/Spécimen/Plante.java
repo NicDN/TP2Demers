@@ -21,6 +21,14 @@ public class Plante extends Spécimen{
         this.estDansEauSalee = estDansEauSalee;
     }
 
+    public boolean isEstDansEauSalee() {
+        return estDansEauSalee;
+    }
+
+    public boolean isEstFlottante() {
+        return estFlottante;
+    }
+
     
     
     

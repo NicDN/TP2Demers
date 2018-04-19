@@ -21,6 +21,14 @@ public class MammifèreMarin extends Animal{
         this.estCarnivore = estCarnivore;
     }
 
+    public boolean isEstCarnivore() {
+        return estCarnivore;
+    }
+
+    public boolean isEstDansEauSalee() {
+        return estDansEauSalee;
+    }
+
     
 
     
