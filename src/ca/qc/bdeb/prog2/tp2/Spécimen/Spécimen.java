@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,9 +6,8 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
-import ca.qc.bdeb.prog2.tp2.Personne;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 /**
  *
@@ -17,13 +17,11 @@ public abstract class Spécimen implements Serializable {
 
     private static int numTransac=0;
 
-    
-
     protected String dateObservation, nom, couleur;
-    protected int quantiéObservé, taille;
-    protected Personne observateur;
+    protected int quantiéObservé;
+    protected double taille/*taille du spécimen*/;
 
-    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, int taille, Personne observateur) {
+    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
         this.dateObservation = dateObservation;
         this.nom = nom;
         this.couleur = couleur;
@@ -32,9 +30,54 @@ public abstract class Spécimen implements Serializable {
         numTransac++;
     }
 
+    public String getCouleur() {
+        return couleur;
+    }
 
-    
-    
-    
+    public String getDateObservation() {
+        return dateObservation;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public static int getNumTransac() {
+        return numTransac;
+    }
+
+ 
+
+    public int getQuantiéObservé() {
+        return quantiéObservé;
+    }
+
+    public double getTaille() {
+        return taille;
+    }
+
+    public void setCouleur(String couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setDateObservation(String dateObservation) {
+        this.dateObservation = dateObservation;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+
+
+    public void setQuantiéObservé(int quantiéObservé) {
+        this.quantiéObservé = quantiéObservé;
+    }
+
+    public void setTaille(double taille) {
+        this.taille = taille;
+    }
+
 
 }
+

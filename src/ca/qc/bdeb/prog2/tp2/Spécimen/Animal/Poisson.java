@@ -5,15 +5,22 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
+
 /**
  *
  * @author Nicolas
  */
 public class Poisson extends Animal{
 
-    @Override
-    public void cri() {
-        System.out.println("Un poission cris avec un scaphandre");
+    private boolean estDansEauSalee/*ou dans l'eau douce*/;
+
+    public Poisson(boolean estDansEauSalee, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
+        super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille);
+        this.estDansEauSalee = estDansEauSalee;
+    }
+
+    public boolean isEstDansEauSalee() {
+        return estDansEauSalee;
     }
     
     

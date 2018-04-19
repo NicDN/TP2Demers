@@ -5,15 +5,19 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
-import ca.qc.bdeb.prog2.tp2.Personne;
+
+
 
 /**
  *
  * @author Nicolas
  */
-public class Minéral{
+public class Minéral extends Spécimen{
 
-    
-   
+    public Minéral(String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
+        super(dateObservation, nom, couleur, quantiéObservé, taille);
+    }
+
+
     
 }

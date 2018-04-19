@@ -5,14 +5,16 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
+
+
 /**
  *
  * @author Nicolas
  */
 public class Autre extends Animal {
 
-    @Override
-    public void cri() {
+    public Autre (boolean estDansEauSalee, boolean estCarnivore, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
+        super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille);
         
     }
     
