@@ -17,13 +17,12 @@ public abstract class Spécimen implements Serializable {
 
     private static int numTransac=0;
 
-    ArrayList<Spécimen> listeSpécimen = new ArrayList<>();
-
     protected String dateObservation, nom, couleur;
-    protected int quantiéObservé, taille;
+    protected int quantiéObservé;
+    protected double taille;
     protected Personne observateur;
 
-    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, int taille, Personne observateur) {
+    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
         this.dateObservation = dateObservation;
         this.nom = nom;
         this.couleur = couleur;

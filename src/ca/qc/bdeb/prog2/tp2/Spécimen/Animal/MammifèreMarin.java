@@ -5,19 +5,24 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
+import ca.qc.bdeb.prog2.tp2.Personne;
+
 /**
  *
  * @author Nicolas
  */
 public class MammifèreMarin extends Animal{
 
-    @Override
-    public void cri() {
-        
+    private boolean estDansEauSalee/*ou dans l'eau douce*/, estCarnivore/*ou végétarien*/;
+
+    public MammifèreMarin(boolean estDansEauSalee, boolean estCarnivore, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
+        super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille, observateur);
+        this.estDansEauSalee = estDansEauSalee;
+        this.estCarnivore = estCarnivore;
     }
+
     
-    public enum Diette{
-    CARNIVORE,VÉGÉTARIEN;
-}
-    private Diette diette;
+
+    
+    
 }

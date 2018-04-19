@@ -13,12 +13,15 @@ import ca.qc.bdeb.prog2.tp2.Personne;
  */
 public class Plante extends Spécimen{
     
-    private boolean estFlottante/*ou immergée*/;
+    private boolean estFlottante/*ou immergée*/, estDansEauSalee/*ou dans l'eau douce*/;
 
-    public Plante(boolean estFlottante, String dateObservation, String nom, String couleur, int quantiéObservé, int taille, Personne observateur) {
+    public Plante(boolean estFlottante, boolean estDansEauSalee, String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
         super(dateObservation, nom, couleur, quantiéObservé, taille, observateur);
-        this.estFlottante=estFlottante;
+        this.estFlottante = estFlottante;
+        this.estDansEauSalee = estDansEauSalee;
     }
+
+    
     
     
 }

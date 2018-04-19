@@ -5,24 +5,25 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
+import ca.qc.bdeb.prog2.tp2.Personne;
 import ca.qc.bdeb.prog2.tp2.Spécimen.Spécimen;
 
 /**
  *
  * @author Nicolas
  */
-public abstract class Animal{
+public abstract class Animal extends Spécimen{
     
-    public enum Sexe{
-        MALE,
-        FEMELLE;
+    protected boolean estMale/*ou femmelle*/;
+    protected String cri;
+
+    public Animal(boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
+        super(dateObservation, nom, couleur, quantiéObservé, taille, observateur);
+        this.estMale = estMale;
+        this.cri = cri;
     }
-    public enum Eau{
-        SALÉ,
-        DOUCE;
-    }
-    protected Sexe sexe;
-    protected Eau eau;
    
-    public abstract void cri();
+    public void cri(){
+        System.out.println("Le cris de l'animal "+nom+" est "+cri);
+    }
 }
