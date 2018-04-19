@@ -21,7 +21,6 @@ public class GestionPokedex {
     public void afficherMenu() {
         boolean erreur = true;
 
-        
         while (erreur) {
 
             System.out.println("Sassissez une des options suivantes:\n");
@@ -42,11 +41,11 @@ public class GestionPokedex {
             } catch (NumberFormatException e) {
                 System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
                 //Exception autre
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
             }
         }
-        
+
         optionMenu(choix);
     }
 
@@ -70,10 +69,31 @@ public class GestionPokedex {
     }
 
     private void sousMenuModifier() {
-        System.out.println("1-Supprimer un spécimen\n2-Modifier la quantité "
-                + "aperçue d'un spécimen donné\n3-Retourner au menu principal");
-        choix = Integer.parseInt(clavier.nextLine());
-        //Il faudra Gérer exception+bon chiffre parmi ceux demandés
+        boolean erreur = true;
+
+        while (erreur) {
+
+            System.out.println("Sassissez une des options suivantes:\n");
+            System.out.println("1-Supprimer un spécimen\n2-Modifier la quantité "
+                    + "aperçue d'un spécimen donné\n3-Retourner au menu principal");
+
+            //Sasir une donné et essayer de la convertir en int
+            try {
+                choix = Integer.parseInt(clavier.nextLine());
+                //Validation de la donnée une fois convertie
+                if (choix <= 0 || choix >= 4) {
+                    System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
+                } else {
+                    erreur = false;
+                }
+                //Exception d'une string vers un int
+            } catch (NumberFormatException e) {
+                System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
+                //Exception autre
+            } catch (Exception e) {
+                System.out.println("Exeption autre dans classe GestionPokedex, méthode sousMenuModifier");
+            }
+        }
         optionMenuModifier(choix);
     }
 
@@ -93,11 +113,11 @@ public class GestionPokedex {
     }
 
     private void supprimerSpecimen() {
-        
+
     }
 
     private void modifierQuantitéApercu() {
-        
+
     }
 
     private void statistiques() {
@@ -107,24 +127,24 @@ public class GestionPokedex {
     }
 
     private void afficherNbEntréesTypes() {
-        
+
     }
 
     private void afficherNbEntréesPersonnes() {
-        
+
     }
 
     private void afficherInfosPersonnes() {
-        
+
     }
 
     private void quitter() {
-                sauvegarderFichierPokedex();
-                System.exit(choix);
+        sauvegarderFichierPokedex();
+        System.exit(choix);
     }
 
     private void sauvegarderFichierPokedex() {
-       //Utiliser serialization pour sauvegarder les informations.
+        //Utiliser serialization pour sauvegarder les informations.
     }
 
 }

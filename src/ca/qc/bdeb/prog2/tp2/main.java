@@ -18,28 +18,34 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
-       boolean erreur =false;
-       
+    public static void main(String[] args) {
+        boolean erreur = false;
+
         charcherListePersonnes();
         chargerFichierPokedex();
-        
-        erreur=demanderIdentité();
-        
-        if(erreur){
-            GestionPokedex pokedex=new GestionPokedex(); //Créer un pokedex
+
+        erreur = demanderIdentité();
+
+        if (erreur) {
+            GestionPokedex pokedex = new GestionPokedex(); //Créer un pokedex
             pokedex.afficherMenu(); //Call le menu
-            
-        }else if(!erreur){
+
+        } else if (!erreur) {
             System.out.println("Vous avez échoué vos 3 tentatives!");
             System.exit(0);
         }
-        
+
     }
 
-    private static void charcherListePersonnes() throws FileNotFoundException {
-//       Va créer les personnes à partir du fichier texte 
-BufferedReader lecture=new BufferedReader(new FileReader("personnes.txt"));
+    private static void charcherListePersonnes() {
+        // Va créer les personnes à partir du fichier texte
+        // Gère les exeptions aussi
+        try {
+            
+            BufferedReader lecture = new BufferedReader(new FileReader("personnes.txt"));
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier "+"personnes.txt"+"n'a pas été trouver dans la méthode charcherListePersonnes du main");
+        }
 
     }
 
@@ -48,10 +54,10 @@ BufferedReader lecture=new BufferedReader(new FileReader("personnes.txt"));
 //        Si fichier inexistant, on va devoir catcher filenotfound et ensuite créer
     }
 
-    private  static boolean demanderIdentité() {
-       boolean vérifier = false;
-       //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
-       return vérifier;
+    private static boolean demanderIdentité() {
+        boolean vérifier = false;
+        //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
+        return vérifier;
     }
-    
+
 }

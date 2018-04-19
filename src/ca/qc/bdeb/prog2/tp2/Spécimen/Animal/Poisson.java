@@ -13,7 +13,7 @@ public class Poisson extends Animal{
 
     @Override
     public void cri() {
-        System.out.println("Un poission n'a pas de cri");
+        System.out.println("Un poission cris avec un scaphandre");
     }
     
     
