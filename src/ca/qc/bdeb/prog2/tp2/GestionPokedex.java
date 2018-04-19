@@ -19,14 +19,34 @@ public class GestionPokedex {
     //On a déjà fait une liste de toutes le entrées dans la classe spécimen...
 
     public void afficherMenu() {
+        boolean erreur = true;
 
-        System.out.println("Sassissez une des options suivantes:\n");
-        System.out.println("1- Consulter les spécimens déjà saisis\n2- Saisir "
-                + "un nouveau spécimen\n3- Modifier un spécimen\n4- Statistiques"
-                + "\n5- Quitter");
+        
+        while (erreur) {
 
-        choix = Integer.parseInt(clavier.nextLine());
-        //Il faudra Gérer exception+bon chiffre parmi ceux demandés
+            System.out.println("Sassissez une des options suivantes:\n");
+            System.out.println("1- Consulter les spécimens déjà saisis\n2- Saisir "
+                    + "un nouveau spécimen\n3- Modifier un spécimen\n4- Statistiques"
+                    + "\n5- Quitter");
+
+            //Sasir une donné et essayer de la convertir en int
+            try {
+                choix = Integer.parseInt(clavier.nextLine());
+                //Validation de la donnée une fois convertie
+                if (choix <= 0 || choix >= 6) {
+                    System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
+                } else {
+                    erreur = false;
+                }
+                //Exception d'une string vers un int
+            } catch (NumberFormatException e) {
+                System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
+                //Exception autre
+            }catch (Exception e) {
+                System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
+            }
+        }
+        
         optionMenu(choix);
     }
 
