@@ -6,13 +6,14 @@
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Nicolas
  */
-public abstract class Spécimen {
+public abstract class Spécimen implements Serializable {
 
     private static int numTransac=0;
 

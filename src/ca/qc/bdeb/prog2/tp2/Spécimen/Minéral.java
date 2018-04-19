@@ -5,10 +5,15 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
+import ca.qc.bdeb.prog2.tp2.Personne;
+
 /**
  *
  * @author Nicolas
  */
-public class Minéral extends Spécimen {
+public class Minéral{
+
+    
+   
     
 }
