@@ -5,7 +5,7 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
-import ca.qc.bdeb.prog2.tp2.Personne;
+
 
 /**
  *
@@ -15,8 +15,8 @@ public class Plante extends Spécimen{
     
     private boolean estFlottante/*ou immergée*/, estDansEauSalee/*ou dans l'eau douce*/;
 
-    public Plante(boolean estFlottante, boolean estDansEauSalee, String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
-        super(dateObservation, nom, couleur, quantiéObservé, taille, observateur);
+    public Plante(boolean estFlottante, boolean estDansEauSalee, String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
+        super(dateObservation, nom, couleur, quantiéObservé, taille);
         this.estFlottante = estFlottante;
         this.estDansEauSalee = estDansEauSalee;
     }

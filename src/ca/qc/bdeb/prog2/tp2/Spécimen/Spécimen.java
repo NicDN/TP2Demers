@@ -5,9 +5,8 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
-import ca.qc.bdeb.prog2.tp2.Personne;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 /**
  *
@@ -19,10 +18,9 @@ public abstract class Spécimen implements Serializable {
 
     protected String dateObservation, nom, couleur;
     protected int quantiéObservé;
-    protected double taille;
-    protected Personne observateur;
+    protected double taille/*taille du spécimen*/;
 
-    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
+    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
         this.dateObservation = dateObservation;
         this.nom = nom;
         this.couleur = couleur;
@@ -47,9 +45,7 @@ public abstract class Spécimen implements Serializable {
         return numTransac;
     }
 
-    public Personne getObservateur() {
-        return observateur;
-    }
+ 
 
     public int getQuantiéObservé() {
         return quantiéObservé;
@@ -71,9 +67,7 @@ public abstract class Spécimen implements Serializable {
         this.nom = nom;
     }
 
-    public void setObservateur(Personne observateur) {
-        this.observateur = observateur;
-    }
+
 
     public void setQuantiéObservé(int quantiéObservé) {
         this.quantiéObservé = quantiéObservé;

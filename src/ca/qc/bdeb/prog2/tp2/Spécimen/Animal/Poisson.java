@@ -5,7 +5,6 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
-import ca.qc.bdeb.prog2.tp2.Personne;
 
 /**
  *
@@ -15,8 +14,8 @@ public class Poisson extends Animal{
 
     private boolean estDansEauSalee/*ou dans l'eau douce*/;
 
-    public Poisson(boolean estDansEauSalee, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
-        super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille, observateur);
+    public Poisson(boolean estDansEauSalee, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
+        super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille);
         this.estDansEauSalee = estDansEauSalee;
     }
 
