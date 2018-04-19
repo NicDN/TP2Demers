@@ -8,6 +8,7 @@ package ca.qc.bdeb.prog2.tp2;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -37,27 +38,30 @@ public class main {
 
     }
 
-    private static void charcherListePersonnes() {
-        // Va créer les personnes à partir du fichier texte
-        // Gère les exeptions aussi
-        try {
-            
-            BufferedReader lecture = new BufferedReader(new FileReader("personnes.txt"));
-        } catch (FileNotFoundException e) {
-            System.out.println("Le fichier "+"personnes.txt"+"n'a pas été trouver dans la méthode charcherListePersonnes du main");
-        }
+    public static void charcherListePersonnes() {
 
     }
 
-    private static void chargerFichierPokedex() {
+    public static void chargerFichierPokedex() {
 //        Va charger le contenu du fichier et le mettre dans la liste de spécimen?? À vérifier
 //        Si fichier inexistant, on va devoir catcher filenotfound et ensuite créer
     }
 
-    private static boolean demanderIdentité() {
+    public static boolean demanderIdentité() {
         boolean vérifier = false;
         //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
         return vérifier;
     }
 
+    public static void ouvertureFichier(String fichier) {
+        // Va créer les personnes à partir du fichier texte
+        // Gère les exeptions aussi
+        try {
+            BufferedReader lecture = new BufferedReader(new FileReader(fichier));
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+        } catch (IOException e) {
+            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
+        }
+    }
 }
