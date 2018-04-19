@@ -12,14 +12,28 @@ import java.util.ArrayList;
  *
  * @author Nicolas
  */
-public class Spécimen {
+public abstract class Spécimen {
 
-    private static int numTransac;
+    private static int numTransac=0;
 
     ArrayList<Spécimen> listeSpécimen = new ArrayList<>();
 
     protected String dateObservation, nom, couleur;
     protected int quantiéObservé, taille;
     protected Personne observateur;
+
+    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, int taille, Personne observateur) {
+        this.dateObservation = dateObservation;
+        this.nom = nom;
+        this.couleur = couleur;
+        this.quantiéObservé = quantiéObservé;
+        this.taille = taille;
+        numTransac++;
+    }
+
+
+    
+    
+    
 
 }
