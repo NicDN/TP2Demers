@@ -84,6 +84,7 @@ public class main {
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
+        System.out.println("essai a enlever");
     }
 
     public void sauvegarderFichierPokedex(String fichier, ArrayList<Spécimen> listeSpécimen) {
