@@ -6,6 +6,7 @@
  */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
+import ca.qc.bdeb.prog2.tp2.Personne;
 import java.io.Serializable;
 
 
@@ -20,13 +21,15 @@ public abstract class Spécimen implements Serializable {
     protected String dateObservation, nom, couleur;
     protected int quantiéObservé;
     protected double taille/*taille du spécimen*/;
+    protected Personne observateur;
 
-    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille) {
+    public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille/*, Personne observateur*/) {
         this.dateObservation = dateObservation;
         this.nom = nom;
         this.couleur = couleur;
         this.quantiéObservé = quantiéObservé;
         this.taille = taille;
+        //this.observateur=observateur;
         numTransac++;
     }
 

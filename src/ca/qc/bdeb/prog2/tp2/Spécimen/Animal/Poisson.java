@@ -19,7 +19,7 @@ public class Poisson extends Animal{
         this.estDansEauSalee = estDansEauSalee;
     }
 
-    public boolean isEstDansEauSalee() {
+    public boolean getisEstDansEauSalee() {
         return estDansEauSalee;
     }
     
