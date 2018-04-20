@@ -24,8 +24,7 @@ public class main {
 
     public static void main(String[] args) {
         
-//        ArrayList<Spécimen> listeSpécimen = new ArrayList();
-//        ArrayList<Personne>listePersonne=new ArrayList();
+
 
         boolean erreur = false;
 
@@ -42,36 +41,36 @@ public class main {
 
     }
 
-    public static void charcherListePersonnes(String fichier, ArrayList<Personne>listePersonne) throws IOException {
-        String codeAcces = null;
-        String mdp = null;
-        String nom = null;
-        String age = null;
-        BufferedReader lecture = null;
-        try {
-            lecture = new BufferedReader(new FileReader(fichier));
-        } catch (FileNotFoundException e) {
-            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
-            System.exit(0);
-        } catch (IOException e) {
-            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
-        }
-        String ligne = lecture.readLine();
-
-        while (ligne != null) {
-            String[] contenuLigne = ligne.split(";");
-            contenuLigne[0] = codeAcces;
-            contenuLigne[1] = mdp;
-            contenuLigne[2] = nom;
-            contenuLigne[3]=age;
-            int ageint=Integer.parseInt(age);
-           
-            Personne personne=new Personne(nom,codeAcces,mdp,ageint);
-            listePersonne.add(personne);
-        }
-        lecture.close();
-
-    }
+//    public static void charcherListePersonnes(String fichier, ArrayList<Personne>listePersonne) throws IOException {
+//        String codeAcces = null;
+//        String mdp = null;
+//        String nom = null;
+//        String age = null;
+//        BufferedReader lecture = null;
+//        try {
+//            lecture = new BufferedReader(new FileReader(fichier));
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+//            System.exit(0);
+//        } catch (IOException e) {
+//            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
+//        }
+//        String ligne = lecture.readLine();
+//
+//        while (ligne != null) {
+//            String[] contenuLigne = ligne.split(";");
+//            contenuLigne[0] = codeAcces;
+//            contenuLigne[1] = mdp;
+//            contenuLigne[2] = nom;
+//            contenuLigne[3]=age;
+//            int ageint=Integer.parseInt(age);
+//           
+//            Personne personne=new Personne(nom,codeAcces,mdp,ageint);
+//            listePersonne.add(personne);
+//        }
+//        lecture.close();
+//
+//    }
 
     public static boolean demanderIdentité() {
         boolean vérifier = false;

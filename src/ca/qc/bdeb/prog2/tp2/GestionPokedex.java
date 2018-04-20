@@ -6,19 +6,17 @@
 package ca.qc.bdeb.prog2.tp2;
 
 import ca.qc.bdeb.prog2.tp2.Spécimen.Spécimen;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author Nicolas
- */
 public class GestionPokedex {
 
     ArrayList<Spécimen> listeSpécimen = new ArrayList();
@@ -184,9 +182,9 @@ public class GestionPokedex {
             case "poisson":
                 System.out.println("Eau salée ou Eau douce?");
                 String eau=clavier.nextLine();
-                if(eau.equals("salée")){
+                if(eau.equalsIgnoreCase("salée")){
                     
-                }else if(eau.endsWith("douce")){
+                }else if(eau.equalsIgnoreCase("douce")){
                     
                 }
                //Rendu là
@@ -230,6 +228,36 @@ public class GestionPokedex {
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
+
+    }
+    public static void charcherListePersonnes(String fichier, ArrayList<Personne>listePersonne) throws IOException {
+        String codeAcces = null;
+        String mdp = null;
+        String nom = null;
+        String age = null;
+        BufferedReader lecture = null;
+        try {
+            lecture = new BufferedReader(new FileReader(fichier));
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
+        }
+        String ligne = lecture.readLine();
+
+        while (ligne != null) {
+            String[] contenuLigne = ligne.split(";");
+            contenuLigne[0] = codeAcces;
+            contenuLigne[1] = mdp;
+            contenuLigne[2] = nom;
+            contenuLigne[3]=age;
+            int ageint=Integer.parseInt(age);
+           
+            Personne personne=new Personne(nom,codeAcces,mdp,ageint);
+            listePersonne.add(personne);
+        }
+        lecture.close();
 
     }
 
