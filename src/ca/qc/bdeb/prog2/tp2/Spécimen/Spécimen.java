@@ -81,6 +81,13 @@ public abstract class Spécimen implements Serializable {
         this.taille = taille;
     }
 
+    @Override
+    public String toString() {
+        return dateObservation+" "+ nom+" "+ couleur+" "+quantiéObservé+" "+taille+" "+observateur;
+    }
+public void ajouterQuantitéObservé(int quantité){
+    quantiéObservé=quantiéObservé+quantité;
+}
 
 }
 

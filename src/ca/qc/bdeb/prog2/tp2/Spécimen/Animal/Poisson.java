@@ -24,6 +24,11 @@ public class Poisson extends Animal{
     public boolean getisEstDansEauSalee() {
         return estDansEauSalee;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"eau salée"+estDansEauSalee; 
+    }
     
     
 }

@@ -53,6 +53,11 @@ private static int nbEntrées;
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return nom+" "+age;
+    }
     
 
     

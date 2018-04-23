@@ -32,6 +32,11 @@ public class MammifèreMarin extends Animal{
         return estDansEauSalee;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"eau salée: "+estDansEauSalee+" Carnivore: "+estCarnivore; 
+    }
+
     
 
     

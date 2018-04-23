@@ -31,6 +31,14 @@ public class Plante extends Spécimen{
         return estFlottante;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"flottante: "+estFlottante+" eauSalée: "+estDansEauSalee; 
+    }
+
+    
+    
+
     
     
     

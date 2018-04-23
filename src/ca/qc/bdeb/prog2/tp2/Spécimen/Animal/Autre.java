@@ -15,9 +15,14 @@ import ca.qc.bdeb.prog2.tp2.Personne;
  */
 public class Autre extends Animal {
 
-    public Autre (boolean estDansEauSalee, boolean estCarnivore, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille,Personne observateur) {
+    public Autre ( boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille,Personne observateur) {
         super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille,observateur);
         
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); 
     }
     
     

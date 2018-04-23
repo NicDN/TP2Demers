@@ -26,88 +26,21 @@ public class main {
         
 
 
-        boolean erreur = false;
-
-        erreur = demanderIdentité();
-
-        if (erreur) {
-            GestionPokedex pokedex = new GestionPokedex(); //Créer un pokedex
-            pokedex.afficherMenu(); //Call le menu
-
-        } else if (!erreur) {
-            System.out.println("Vous avez échoué vos 3 tentatives!");
-            System.exit(0);
-        }
-
-    }
-
-//    public static void charcherListePersonnes(String fichier, ArrayList<Personne>listePersonne) throws IOException {
-//        String codeAcces = null;
-//        String mdp = null;
-//        String nom = null;
-//        String age = null;
-//        BufferedReader lecture = null;
-//        try {
-//            lecture = new BufferedReader(new FileReader(fichier));
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
-//            System.exit(0);
-//        } catch (IOException e) {
-//            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
-//        }
-//        String ligne = lecture.readLine();
-//
-//        while (ligne != null) {
-//            String[] contenuLigne = ligne.split(";");
-//            contenuLigne[0] = codeAcces;
-//            contenuLigne[1] = mdp;
-//            contenuLigne[2] = nom;
-//            contenuLigne[3]=age;
-//            int ageint=Integer.parseInt(age);
-//           
-//            Personne personne=new Personne(nom,codeAcces,mdp,ageint);
-//            listePersonne.add(personne);
-//        }
-//        lecture.close();
-//
-//    }
-
-    public static boolean demanderIdentité() {
-        boolean vérifier = false;
-        //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
         
-        return vérifier;
+
+        
+
+        
+            GestionPokedex pokedex = new GestionPokedex(); //Créer un pokedex
+            pokedex.démarrer(); 
+
+        
+
     }
 
-//    public void chargerFichierPokedex(String fichier, ArrayList<Spécimen> listeSpécimen) throws ClassNotFoundException {
-//        try {
-//            FileInputStream fos = new FileInputStream(fichier);
-//            ObjectInputStream oos = new ObjectInputStream(fos);
-//            listeSpécimen = (ArrayList<Spécimen>) oos.readObject();
-//            System.out.println("Fichier chargé");
-//            oos.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
-//        } catch (IOException e) {
-//            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
-//        }
-//        
-//    }
 
-//    public void sauvegarderFichierPokedex(String fichier, ArrayList<Spécimen> listeSpécimen) {
-//        try {
-//            FileOutputStream fos = new FileOutputStream(fichier);
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(listeSpécimen);
-//            oos.flush();
-//            oos.close();
-//            System.out.println("Fichier sauvegardé");
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
-//        } catch (IOException e) {
-//            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
-//        }
-//    }
- //Pas sur que les mtéhodes charger et sauvegarder doivent etre dans le main...
-    //non plus pourles liste de personnes et de spécimen
+
+    
+
+
 }

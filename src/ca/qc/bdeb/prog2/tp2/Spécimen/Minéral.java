@@ -20,6 +20,11 @@ public class Minéral extends Spécimen{
         super(dateObservation, nom, couleur, quantiéObservé, taille,observateur);
     }
 
+    @Override
+    public String toString() {
+        return super.toString(); 
+    }
+
 
     
 }

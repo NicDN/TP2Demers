@@ -35,6 +35,11 @@ public abstract class Animal extends Spécimen{
     public String getCri() {
         return cri;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"male: "+estMale+"son cri:"+cri; 
+    }
     
     
 }
