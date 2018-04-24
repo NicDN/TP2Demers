@@ -29,17 +29,14 @@ public class GestionPokedex {
 
     Scanner clavier = new Scanner(System.in);
     int choix;
-    //La classe Doit contenir une liste d'entrées, besoin de plus d'Explication. 
-    //On a déjà fait une liste de toutes le entrées dans la classe spécimen...
 
-    public void démarrer() {
-
-        //charger fichier personne
-        //décrypter mot de passe
-        //chargerfichier pokedex
+    public void démarrer() throws IOException, ClassNotFoundException {
+        charcherListePersonnes("personnes.txt", listePersonne);
+        décrypterMotDePasses();
+        chargerFichierPokedex("pokedex.bin", listeSpécimen);
+        boolean confirmer = demanderIdentité();
         //demander identité si réussi à trouver mdp on call la menu
         //le menu doit être dans un while
-        
     }
 
     public void afficherMenu() {
@@ -322,6 +319,7 @@ public class GestionPokedex {
             System.out.println("Fichier sauvegardé");
         } catch (FileNotFoundException e) {
             System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+            //CRÉER LE FICHIER À CET EMPLACEMENT!
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
@@ -364,7 +362,7 @@ public class GestionPokedex {
             contenuLigne[1] = mdp;
             contenuLigne[2] = nom;
             contenuLigne[3] = age;
-            int ageint = Integer.parseInt(age);
+            int ageint = Integer.parseInt(age); //try catch à faire
 
             Personne personne = new Personne(nom, codeAcces, mdp, ageint);
             listePersonne.add(personne);
@@ -427,10 +425,29 @@ public class GestionPokedex {
         }
     }
 
-    public static boolean demanderIdentité() {
+    public  boolean demanderIdentité() {
         boolean vérifier = false;
+        boolean erreurUtilisateur;
+        do{
+            erreurUtilisateur=false;
+        System.out.println("Entrez votre nom d'utilisateur");
+        String nomUtilisateur=clavier.nextLine();
+        if(nomUtilisateur.equalsIgnoreCase((listePersonne.get(0)).getCodeAcces())||nomUtilisateur.equalsIgnoreCase((listePersonne.get(1)).getCodeAcces())||nomUtilisateur.equalsIgnoreCase((listePersonne.get(2)).getCodeAcces())||nomUtilisateur.equalsIgnoreCase((listePersonne.get(3)).getCodeAcces())){
+           erreurUtilisateur=false; 
+        }else{
+            System.out.println("Le nom d'utilisateur entré est non existant"); //Pas sur que do while fonctionne
+            erreurUtilisateur=true;
+        }
+        }while(erreurUtilisateur);
+        
         //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
 
         return vérifier;
+    }
+
+    private void décrypterMotDePasses() {
+//        for (int i = 0; i < listePersonne.size(); i++) {
+//
+//        }
     }
 }
