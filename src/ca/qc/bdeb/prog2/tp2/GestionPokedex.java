@@ -21,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -90,7 +91,7 @@ public class GestionPokedex {
         //étapes selon le choix
         switch (choix) {
             case 1://Consulter les spécimens déjà saisis
-
+                consulterSpécimensExistants();
                 break;
             case 2://saisir un nouveau spécimen
                 listeSpécimen.add(ajouterSpécimen(observateur));
@@ -207,7 +208,7 @@ public class GestionPokedex {
     }
 
     private Spécimen ajouterSpécimen(Personne observateur) {
-        boolean erreur, estMale,estDansEauSalee,estCarnivore,estFlottante;
+        boolean erreur, estMale, estDansEauSalee, estCarnivore, estFlottante;
         String dateObservation, type, nom, couleur, cri;
         double taille = 0;
         int quantitéObservé;
@@ -261,7 +262,7 @@ public class GestionPokedex {
                 estDansEauSalee = demanderBoolean("Eau salée", "eau douce");
                 spécimen = new Poisson(estDansEauSalee, estMale, cri, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
-                
+
             case "mammifère marin":
                 estMale = demanderBoolean("male", "femelle");
                 cri = demanderCri();
@@ -269,17 +270,17 @@ public class GestionPokedex {
                 estCarnivore = demanderBoolean("Carnivore", "végétarien");
                 spécimen = new MammifèreMarin(estDansEauSalee, estCarnivore, estMale, cri, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
-                
+
             case "plante aquatique":
                 estDansEauSalee = demanderBoolean("Eau salée", "eau douce");
                 estFlottante = demanderBoolean("Flottante", "Immergé");
                 spécimen = new Plante(estFlottante, estDansEauSalee, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
-                
+
             case "minéral":
                 spécimen = new Minéral(dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
-                
+
             case "autre":
                 estMale = demanderBoolean("male", "femelle");
                 cri = demanderCri();
@@ -447,4 +448,66 @@ public class GestionPokedex {
 
         return choixUtilisateur;
     }
+
+    private void consulterSpécimensExistants() {
+        triCroissantetDécroissant();
+
+        String type = demanderType();
+        
+        triType();//pas fait
+        triAnimaux();//pas fait
+    }
+
+    private void triCroissantetDécroissant() {
+        Spécimen temp;
+        int positionMin;
+        boolean lettrePlusGrande = true;
+        Stack<Spécimen> pileSpécimen = new Stack();
+
+        for (int i = 0; i < listeSpécimen.size() - 1; i++) {
+
+            positionMin = i;
+
+            for (int j = i + 1; j < listeSpécimen.size(); j++) {
+
+                for (int k = 0; k < listeSpécimen.get(j).getNom().length()
+                        && k < listeSpécimen.get(i).getNom().length() && lettrePlusGrande; k++) {
+
+                    if (listeSpécimen.get(j).getNom().charAt(k)
+                            < listeSpécimen.get(positionMin).getNom().charAt(k)) {
+                        positionMin = j;
+                        lettrePlusGrande = false;
+                    }
+                }
+
+            }
+            temp = listeSpécimen.get(positionMin);
+            listeSpécimen.set(positionMin, listeSpécimen.get(i));
+            listeSpécimen.set(i, temp);
+        }
+        
+        System.out.println("Tous les spécimens enregistrés, classés en ordre croissant\n");
+
+        for (int i = 0; i < listeSpécimen.size(); i++) {
+            System.out.println(listeSpécimen.get(i).getNom());
+            pileSpécimen.push(listeSpécimen.get(i));
+        }
+        
+        System.out.println("\n\nTous les spécimens enregistrés, classés en ordre décroissant\n");
+        
+        for (int i = 0; i < pileSpécimen.size(); i++) {
+            System.out.println(pileSpécimen.pop().getNom());
+        }
+        
+        
+    }
+
+    private void triType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void triAnimaux() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
