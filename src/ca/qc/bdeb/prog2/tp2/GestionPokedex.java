@@ -21,6 +21,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestionPokedex {
 
@@ -30,10 +32,19 @@ public class GestionPokedex {
     Scanner clavier = new Scanner(System.in);
     int choix;
 
-    public void démarrer() throws IOException, ClassNotFoundException {
-        charcherListePersonnes("personnes.txt", listePersonne);
+    public void démarrer() {
+        //les try catch ne sont pas bien fait, ils sont automatique
+        try {
+            charcherListePersonnes("personnes.txt", listePersonne);
+        } catch (IOException ex) {
+            Logger.getLogger(GestionPokedex.class.getName()).log(Level.SEVERE, null, ex);
+        }
         décrypterMotDePasses();
-        chargerFichierPokedex("pokedex.bin", listeSpécimen);
+        try {
+            chargerFichierPokedex("pokedex.bin", listeSpécimen);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionPokedex.class.getName()).log(Level.SEVERE, null, ex);
+        }
         boolean confirmer = demanderIdentité();
         //demander identité si réussi à trouver mdp on call la menu
         //le menu doit être dans un while
@@ -42,6 +53,7 @@ public class GestionPokedex {
     public void afficherMenu() {
         boolean erreur = true;
 
+        //boucle de validation du choix du menu
         while (erreur) {
 
             System.out.println("Sassissez une des options suivantes:\n");
@@ -56,6 +68,7 @@ public class GestionPokedex {
                 if (choix <= 0 || choix >= 6) {
                     System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
                 } else {
+                    //tout est beau, on sort de la boucle
                     erreur = false;
                 }
                 //Exception d'une string vers un int
@@ -67,25 +80,28 @@ public class GestionPokedex {
             }
         }
 
+        //méthode qui trète l'obtion de l'utilisateur
         optionMenu(choix);
     }
 
     private void optionMenu(int choix) {
         Personne observateur = new Personne("", "", "", 1);//création d'une personne temporaire temporaire
+
+        //étapes selon le choix
         switch (choix) {
-            case 1:
+            case 1://Consulter les spécimens déjà saisis
 
                 break;
-            case 2:
+            case 2://saisir un nouveau spécimen
                 listeSpécimen.add(ajouterSpécimen(observateur));
                 break;
-            case 3:
+            case 3://modifier un spécimen
                 sousMenuModifier();
                 break;
-            case 4:
+            case 4://statistiques
                 statistiques();
                 break;
-            case 5:
+            case 5://quitter
                 quitter();
                 break;
 
@@ -137,22 +153,15 @@ public class GestionPokedex {
     }
 
     private void supprimerSpecimen() {
+        //variable type représente le type de spécimen
+        //méthode demander type demande a l'utilisateur de saisir un type de spécimen
         String type = demanderType();
 
+        //affichage de la liste du type de spécimen choisi
         afficherListeType(type);
 
-        int élément = 0;
-        boolean erreur = false;
-        do {
-            System.out.println("Quel élément voulez-vous supprimer? Saississez la position");
-            erreur = false;
-            try {
-                élément = Integer.parseInt(clavier.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Erreur de comversion");
-                erreur = true;
-            }
-        } while (erreur);
+        //demande de la position de l'élément que l'utilisateur veut supprimmer
+        int élément = tryCatchInt("Quel élément voulez-vous supprimer? Saississez la position");
 
         listeSpécimen.remove(élément);
         System.out.println((listeSpécimen.get(élément)).getNom() + " a été supprimé.");
@@ -160,32 +169,14 @@ public class GestionPokedex {
     }
 
     private void modifierQuantitéApercu() {
-
         String type = demanderType();
-        afficherListeType(type);
-        boolean erreur = false;
-        int élément = 0, quantité = 0;
 
-        do {
-            System.out.println("Quel élément voulez-vous modifier? Saississez la position");
-            erreur = false;
-            try {
-                élément = Integer.parseInt(clavier.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Erreur de comversion");
-                erreur = true;
-            }
-        } while (erreur);
-        do {
-            System.out.println("Quelle quantité de spécimen voulez-vous ajouter? ");
-            erreur = false;
-            try {
-                quantité = Integer.parseInt(clavier.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Erreur de conversion");
-                erreur = true;
-            }
-        } while (erreur);
+        afficherListeType(type);
+
+        int élément = tryCatchInt("Quel élément voulez-vous modifier? Saississez la position");
+
+        int quantité = tryCatchInt("Quelle quantité de spécimen voulez-vous ajouter? ");
+
         listeSpécimen.get(élément).ajouterQuantitéObservé(quantité);
         System.out.println("La quantité observé à été modifié");
 
@@ -216,9 +207,14 @@ public class GestionPokedex {
     }
 
     private Spécimen ajouterSpécimen(Personne observateur) {
+        boolean erreur, estMale,estDansEauSalee,estCarnivore,estFlottante;
+        String dateObservation, type, nom, couleur, cri;
+        double taille = 0;
+        int quantitéObservé;
+        Spécimen spécimen = null;
+
         System.out.println("Bienvenue dans la section pour ajouter un spécimen");
-        boolean erreur;
-        String dateObservation;
+
         do {
             erreur = false;
             System.out.println("Saisissez la date d'observation (8 carctères)");
@@ -236,13 +232,15 @@ public class GestionPokedex {
             }
 
         } while (erreur);
-        String type = demanderType();
+
+        type = demanderType();
 
         System.out.println("Saisissez son nom");
-        String nom = clavier.nextLine();
+        nom = clavier.nextLine();
+
         System.out.println("Saississez sa couleur");
-        String couleur = clavier.nextLine();
-        double taille = 0;
+        couleur = clavier.nextLine();
+
         do {
             erreur = false;
             System.out.println("Saissisez sa taille");
@@ -253,56 +251,38 @@ public class GestionPokedex {
                 erreur = true;
             }
         } while (erreur);
-        System.out.println("Saississez son sexe");
-        String sexe = clavier.nextLine();
-        boolean estMale;
 
-        erreur = false;
-        int quantitéObservé = 0;
-        do {
-            erreur = false;
-            System.out.println("Saississez la quantité observé");
+        quantitéObservé = tryCatchInt("Saississez la quantité observé");
 
-            try {
-                quantitéObservé = Integer.parseInt(clavier.nextLine());
-
-            } catch (NumberFormatException e) {
-                System.out.println("Erreur de conversion");
-                erreur = true;
-            }
-        } while (erreur);
-        String cri;
-        Spécimen spécimen = null;
         switch (type) {
             case "poisson":
                 estMale = demanderBoolean("male", "femelle");
                 cri = demanderCri();
-                boolean estDansEauSalee = false;
                 estDansEauSalee = demanderBoolean("Eau salée", "eau douce");
                 spécimen = new Poisson(estDansEauSalee, estMale, cri, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
-                //Rendu là
                 break;
+                
             case "mammifère marin":
                 estMale = demanderBoolean("male", "femelle");
                 cri = demanderCri();
-                estDansEauSalee = false;
                 estDansEauSalee = demanderBoolean("Eau salée", "eau douce");
-                boolean estCarnivore = demanderBoolean("Carnivore", "végétarien");
+                estCarnivore = demanderBoolean("Carnivore", "végétarien");
                 spécimen = new MammifèreMarin(estDansEauSalee, estCarnivore, estMale, cri, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
+                
             case "plante aquatique":
-                estDansEauSalee = false;
                 estDansEauSalee = demanderBoolean("Eau salée", "eau douce");
-                boolean estFlottante = demanderBoolean("Flottante", "Immergé");
+                estFlottante = demanderBoolean("Flottante", "Immergé");
                 spécimen = new Plante(estFlottante, estDansEauSalee, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
+                
             case "minéral":
                 spécimen = new Minéral(dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
+                
             case "autre":
                 estMale = demanderBoolean("male", "femelle");
                 cri = demanderCri();
-
                 spécimen = new Autre(estMale, cri, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
         }
@@ -425,23 +405,22 @@ public class GestionPokedex {
         }
     }
 
-    public  boolean demanderIdentité() {
+    public boolean demanderIdentité() {
         boolean vérifier = false;
         boolean erreurUtilisateur;
-        do{
-            erreurUtilisateur=false;
-        System.out.println("Entrez votre nom d'utilisateur");
-        String nomUtilisateur=clavier.nextLine();
-        if(nomUtilisateur.equalsIgnoreCase((listePersonne.get(0)).getCodeAcces())||nomUtilisateur.equalsIgnoreCase((listePersonne.get(1)).getCodeAcces())||nomUtilisateur.equalsIgnoreCase((listePersonne.get(2)).getCodeAcces())||nomUtilisateur.equalsIgnoreCase((listePersonne.get(3)).getCodeAcces())){
-           erreurUtilisateur=false; 
-        }else{
-            System.out.println("Le nom d'utilisateur entré est non existant"); //Pas sur que do while fonctionne
-            erreurUtilisateur=true;
-        }
-        }while(erreurUtilisateur);
-        
-        //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
+        do {
+            erreurUtilisateur = false;
+            System.out.println("Entrez votre nom d'utilisateur");
+            String nomUtilisateur = clavier.nextLine();
+            if (nomUtilisateur.equalsIgnoreCase((listePersonne.get(0)).getCodeAcces()) || nomUtilisateur.equalsIgnoreCase((listePersonne.get(1)).getCodeAcces()) || nomUtilisateur.equalsIgnoreCase((listePersonne.get(2)).getCodeAcces()) || nomUtilisateur.equalsIgnoreCase((listePersonne.get(3)).getCodeAcces())) {
+                erreurUtilisateur = false;
+            } else {
+                System.out.println("Le nom d'utilisateur entré est non existant"); //Pas sur que do while fonctionne
+                erreurUtilisateur = true;
+            }
+        } while (erreurUtilisateur);
 
+        //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
         return vérifier;
     }
 
@@ -449,5 +428,23 @@ public class GestionPokedex {
 //        for (int i = 0; i < listePersonne.size(); i++) {
 //
 //        }
+    }
+
+    //métode qui converti un string en int avec une boucle de validation
+    private int tryCatchInt(String messageAUtilisateur) {
+        boolean erreur;
+        int choixUtilisateur = 0;
+        do {
+            System.out.println(messageAUtilisateur);
+            erreur = false;
+            try {
+                choixUtilisateur = Integer.parseInt(clavier.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur de comversion");
+                erreur = true;
+            }
+        } while (erreur);
+
+        return choixUtilisateur;
     }
 }
