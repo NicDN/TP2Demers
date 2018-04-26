@@ -33,23 +33,27 @@ public class GestionPokedex {
     Scanner clavier = new Scanner(System.in);
     int choix;
 
-    public void démarrer(){
-        //les try catch ne sont pas bien fait, ils sont automatique
-        
+    public void démarrer() {
+        try {
+            //les try catch ne sont pas bien fait, ils sont automatique
+
             charcherListePersonnes("personnes.txt", listePersonne);
-        
-        décrypterMotDePasses();
+        } catch (IOException ex) {
+
+        }
+
         try {
             chargerFichierPokedex("pokedex.bin", listeSpécimen);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionPokedex.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        boolean confirmer = demanderIdentité();
+        demanderIdentité();
         //demander identité si réussi à trouver mdp on call la menu
         //le menu doit être dans un while
     }
 
     public void afficherMenu() {
+
         boolean erreur = true;
 
         //boucle de validation du choix du menu
@@ -90,15 +94,19 @@ public class GestionPokedex {
         switch (choix) {
             case 1://Consulter les spécimens déjà saisis
                 consulterSpécimensExistants();
+                afficherMenu();
                 break;
             case 2://saisir un nouveau spécimen
                 listeSpécimen.add(ajouterSpécimen(observateur));
+                afficherMenu();
                 break;
             case 3://modifier un spécimen
                 sousMenuModifier();
+                afficherMenu();
                 break;
             case 4://statistiques
                 statistiques();
+                afficherMenu();
                 break;
             case 5://quitter
                 quitter();
@@ -140,9 +148,11 @@ public class GestionPokedex {
         switch (choix) {
             case 1:
                 supprimerSpecimen();
+                sousMenuModifier();
                 break;
             case 2:
                 modifierQuantitéApercu();
+                sousMenuModifier();
                 break;
             case 3:
                 afficherMenu();
@@ -188,7 +198,20 @@ public class GestionPokedex {
     }
 
     private void afficherNbEntréesTypes() {
+        int cptMinéral, cptPoisson, cptMammifère, cptAutre, cptPlante;
+        for (int i = 0; i < listeSpécimen.size(); i++) {
+            if (listeSpécimen.get(i) instanceof Plante) {
 
+            } else if (listeSpécimen.get(i) instanceof Minéral) {
+
+            } else if (listeSpécimen.get(i) instanceof Poisson) {
+
+            } else if (listeSpécimen.get(i) instanceof MammifèreMarin) {
+
+            } else if (listeSpécimen.get(i) instanceof Autre) {
+
+            }
+        }
     }
 
     private void afficherNbEntréesPersonnes() {
@@ -200,8 +223,8 @@ public class GestionPokedex {
     }
 
     private void quitter() {
-//Ne pas oublier de ré enregistrer
-//Créer un fichier pokedex.bin si il n'y en avait pas au départ
+        sauvegarderFichierPokedex("pokedex.bin", listeSpécimen);
+
         System.exit(choix);
     }
 
@@ -296,9 +319,6 @@ public class GestionPokedex {
             oos.flush();
             oos.close();
             System.out.println("Fichier sauvegardé");
-        } catch (FileNotFoundException e) {
-            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
-            //CRÉER LE FICHIER À CET EMPLACEMENT!
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
@@ -313,6 +333,7 @@ public class GestionPokedex {
             oos.close();
         } catch (FileNotFoundException e) {
             System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
@@ -407,26 +428,50 @@ public class GestionPokedex {
     public boolean demanderIdentité() {
         boolean vérifier = false;
         boolean erreurUtilisateur;
+        int positionUtilisateur = 0;
         do {
             erreurUtilisateur = false;
             System.out.println("Entrez votre nom d'utilisateur");
             String nomUtilisateur = clavier.nextLine();
-            if (nomUtilisateur.equalsIgnoreCase((listePersonne.get(0)).getCodeAcces()) || nomUtilisateur.equalsIgnoreCase((listePersonne.get(1)).getCodeAcces()) || nomUtilisateur.equalsIgnoreCase((listePersonne.get(2)).getCodeAcces()) || nomUtilisateur.equalsIgnoreCase((listePersonne.get(3)).getCodeAcces())) {
-                erreurUtilisateur = false;
-            } else {
-                System.out.println("Le nom d'utilisateur entré est non existant"); //Pas sur que do while fonctionne
-                erreurUtilisateur = true;
+            for (int position = 0; position < listePersonne.size() && erreurUtilisateur; position++) {
+
+                if (nomUtilisateur.equalsIgnoreCase(listePersonne.get(position).getCodeAcces())) {
+                    erreurUtilisateur = false;
+                    positionUtilisateur = position;
+
+                } else {
+                    System.out.println("Votre nom d'utilisateur est inexistant");
+                    erreurUtilisateur = true;
+                }
+
             }
         } while (erreurUtilisateur);
+        String mdpDécrypté = décrypterMotDePasses(positionUtilisateur);
+        boolean erreur = true;
 
-        //Si après 3 tentatives de demande de mot de passe raté: mettre le boolean true
-        return vérifier;
+        for (int i = 0; i < 3 && erreur; i++) {
+            System.out.println("Entrez votre mot de passe");
+            String mdp = clavier.nextLine();
+            erreur = vérifierIdentité(mdpDécrypté, mdp);
+        }
+        if (erreur) {
+            System.exit(0);
+
+        }
+        afficherMenu();
+        return erreur;
     }
 
-    private void décrypterMotDePasses() {
-//        for (int i = 0; i < listePersonne.size(); i++) {
-//
-//        }
+    private String décrypterMotDePasses(int position) {
+        Encryption encryption = null;
+        try {
+            encryption = new Encryption();
+        } catch (Exception ex) {
+            System.exit(choix);
+        }
+
+        String mdpDécrypté = encryption.decrypt(listePersonne.get(position).getMdp());
+        return mdpDécrypté;
     }
 
     //métode qui converti un string en int avec une boucle de validation
@@ -575,6 +620,20 @@ public class GestionPokedex {
             }
 
         }
+    }
+
+    private void vérifierMotDePasse(String mdpDécrypté) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean vérifierIdentité(String mdpDécrypté, String mdp) {
+        boolean erreur;
+        if (mdpDécrypté.equalsIgnoreCase(mdp)) {
+            erreur = false;
+        } else {
+            erreur = true;
+        }
+        return erreur;
     }
 
 }
