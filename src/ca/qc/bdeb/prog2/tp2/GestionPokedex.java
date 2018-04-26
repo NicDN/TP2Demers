@@ -33,13 +33,11 @@ public class GestionPokedex {
     Scanner clavier = new Scanner(System.in);
     int choix;
 
-    public void démarrer() {
+    public void démarrer(){
         //les try catch ne sont pas bien fait, ils sont automatique
-        try {
+        
             charcherListePersonnes("personnes.txt", listePersonne);
-        } catch (IOException ex) {
-            Logger.getLogger(GestionPokedex.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         décrypterMotDePasses();
         try {
             chargerFichierPokedex("pokedex.bin", listeSpécimen);
@@ -453,9 +451,9 @@ public class GestionPokedex {
         triCroissantetDécroissant();
 
         String type = demanderType();
-        
-        triType();//pas fait
-        triAnimaux();//pas fait
+
+        triType(type);
+        triAnimaux();
     }
 
     private void triCroissantetDécroissant() {
@@ -485,29 +483,98 @@ public class GestionPokedex {
             listeSpécimen.set(positionMin, listeSpécimen.get(i));
             listeSpécimen.set(i, temp);
         }
-        
+
         System.out.println("Tous les spécimens enregistrés, classés en ordre croissant\n");
 
         for (int i = 0; i < listeSpécimen.size(); i++) {
-            System.out.println(listeSpécimen.get(i).getNom());
+            System.out.println(listeSpécimen.get(i));
             pileSpécimen.push(listeSpécimen.get(i));
         }
-        
+
         System.out.println("\n\nTous les spécimens enregistrés, classés en ordre décroissant\n");
-        
+
         for (int i = 0; i < pileSpécimen.size(); i++) {
-            System.out.println(pileSpécimen.pop().getNom());
+            System.out.println(pileSpécimen.pop());
         }
-        
-        
+
     }
 
-    private void triType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void triType(String type) {
+        Spécimen temp;
+        boolean lettrePlusGrande = true;
+
+        for (int position = listeSpécimen.size() - 1; position >= 0; position--) {
+
+            for (int recherche = 0; recherche <= position - 1; recherche++) {
+
+                for (int k = 0; k < listeSpécimen.get(recherche).getNom().length()
+                        && k < listeSpécimen.get(position).getNom().length() && lettrePlusGrande; k++) {
+
+                    if (listeSpécimen.get(recherche).getNom().charAt(k)
+                            > listeSpécimen.get(recherche + 1).getNom().charAt(k)) {
+                        temp = listeSpécimen.get(recherche);
+                        listeSpécimen.set(recherche, listeSpécimen.get(recherche + 1));
+                        listeSpécimen.set(recherche + 1, temp);
+                        lettrePlusGrande = false;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < listeSpécimen.size(); i++) {
+            if (type.equals("poisson") && ((listeSpécimen.get(i)) instanceof Poisson)) {
+                System.out.println(listeSpécimen.get(i));
+
+            } else if (type.equals("mammifère marin") && ((listeSpécimen.get(i)) instanceof MammifèreMarin)) {
+                System.out.println(listeSpécimen.get(i));
+
+            } else if (type.equals("plante aquatique") && ((listeSpécimen.get(i)) instanceof Plante)) {
+                System.out.println(listeSpécimen.get(i));
+
+            } else if (type.equals("minéral") && ((listeSpécimen.get(i)) instanceof Minéral)) {
+                System.out.println(listeSpécimen.get(i));
+
+            } else if (type.equals("autre") && ((listeSpécimen.get(i)) instanceof Autre)) {
+                System.out.println(listeSpécimen.get(i));
+
+            }
+
+        }
     }
 
     private void triAnimaux() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Spécimen temp;
+        int positionMin;
+        boolean chiffrePlusGrande = true;
+
+        for (int i = 0; i < listeSpécimen.size() - 1; i++) {
+
+            positionMin = i;
+
+            for (int j = i + 1; j < listeSpécimen.size(); j++) {
+
+                for (int k = 0; k < listeSpécimen.get(j).getDateObservation().length()
+                        && k < listeSpécimen.get(i).getDateObservation().length() && chiffrePlusGrande; k++) {
+
+                    if (listeSpécimen.get(j).getDateObservation().charAt(k)
+                            < listeSpécimen.get(positionMin).getDateObservation().charAt(k)) {
+                        positionMin = j;
+                        chiffrePlusGrande = false;
+                    }
+                }
+
+            }
+            temp = listeSpécimen.get(positionMin);
+            listeSpécimen.set(positionMin, listeSpécimen.get(i));
+            listeSpécimen.set(i, temp);
+        }
+
+        for (int i = 0; i < listeSpécimen.size(); i++) {
+            if (((listeSpécimen.get(i)) instanceof Poisson) || ((listeSpécimen.get(i)) instanceof MammifèreMarin) || ((listeSpécimen.get(i)) instanceof Autre)) {
+                System.out.println(listeSpécimen.get(i));
+            }
+
+        }
     }
 
 }
