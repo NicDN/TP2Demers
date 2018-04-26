@@ -89,5 +89,9 @@ public void ajouterQuantitéObservé(int quantité){
     quantiéObservé=quantiéObservé+quantité;
 }
 
+    public Personne getObservateur() {
+        return observateur;
+    }
+
 }
 

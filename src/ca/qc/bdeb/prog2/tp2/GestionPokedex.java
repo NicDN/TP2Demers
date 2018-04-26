@@ -198,28 +198,53 @@ public class GestionPokedex {
     }
 
     private void afficherNbEntréesTypes() {
-        int cptMinéral, cptPoisson, cptMammifère, cptAutre, cptPlante;
+        int cptMinéral = 0, cptPoisson = 0, cptMammifère = 0, cptAutre = 0, cptPlante = 0;
         for (int i = 0; i < listeSpécimen.size(); i++) {
             if (listeSpécimen.get(i) instanceof Plante) {
-
+                cptPlante++;
             } else if (listeSpécimen.get(i) instanceof Minéral) {
-
+                cptMinéral++;
             } else if (listeSpécimen.get(i) instanceof Poisson) {
-
+                cptPoisson++;
             } else if (listeSpécimen.get(i) instanceof MammifèreMarin) {
-
+                cptMammifère++;
             } else if (listeSpécimen.get(i) instanceof Autre) {
-
+                cptAutre++;
             }
         }
+        System.out.println("Nombre d'entrées de plante "+cptPlante+"\nNombre d'"
+                + "entrées de poisson: "+cptPoisson+"\nNombre d'entrées de minér"
+                        + "al: "+cptMinéral+"\nNombre d'entrées de autre: "
+                +cptAutre+"\nNombre d'entrées de mammifère marin: "+cptMammifère);
     }
 
     private void afficherNbEntréesPersonnes() {
+        int cptMitaine = 0, cptBieber = 0, cptJohn = 0, cptConseil = 0, cptCrunch = 0;
+for (int i = 0; i < listeSpécimen.size(); i++) {
+            if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("mitaine")) {
+                cptMitaine++;
+            } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("bieber")) {
+               cptBieber++;
+            } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("john")) {
+               cptJohn++;
+            } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("crunch") ) {
+                cptCrunch++;
+            }else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("conseil") ) {
+                cptConseil++;
+            }
+        }
+ System.out.println("Nombre d'entrées de Capitaine Mitaine "+cptMitaine+"\nNombre d'"
+                + "entrées de Justin Bieber: "+cptBieber+"\nNombre d'entrées de John Deere"
+                        + ": "+cptJohn+"\nNombre d'entrées de Conseil: "
+                +cptConseil+"\nNombre d'entrées de Capitaine Crunch: "+cptCrunch);
 
     }
 
     private void afficherInfosPersonnes() {
-
+        System.out.println("Informations sur les personnes: ");
+        for(int i=0;i<listePersonne.size();i++){
+            System.out.println(listePersonne.get(i));
+        }
     }
 
     private void quitter() {
@@ -620,10 +645,6 @@ public class GestionPokedex {
             }
 
         }
-    }
-
-    private void vérifierMotDePasse(String mdpDécrypté) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private boolean vérifierIdentité(String mdpDécrypté, String mdp) {
