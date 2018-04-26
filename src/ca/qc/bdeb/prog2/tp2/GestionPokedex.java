@@ -212,37 +212,37 @@ public class GestionPokedex {
                 cptAutre++;
             }
         }
-        System.out.println("Nombre d'entrées de plante "+cptPlante+"\nNombre d'"
-                + "entrées de poisson: "+cptPoisson+"\nNombre d'entrées de minér"
-                        + "al: "+cptMinéral+"\nNombre d'entrées de autre: "
-                +cptAutre+"\nNombre d'entrées de mammifère marin: "+cptMammifère);
+        System.out.println("Nombre d'entrées de plante " + cptPlante + "\nNombre d'"
+                + "entrées de poisson: " + cptPoisson + "\nNombre d'entrées de minér"
+                + "al: " + cptMinéral + "\nNombre d'entrées de autre: "
+                + cptAutre + "\nNombre d'entrées de mammifère marin: " + cptMammifère);
     }
 
     private void afficherNbEntréesPersonnes() {
         int cptMitaine = 0, cptBieber = 0, cptJohn = 0, cptConseil = 0, cptCrunch = 0;
-for (int i = 0; i < listeSpécimen.size(); i++) {
+        for (int i = 0; i < listeSpécimen.size(); i++) {
             if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("mitaine")) {
                 cptMitaine++;
             } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("bieber")) {
-               cptBieber++;
+                cptBieber++;
             } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("john")) {
-               cptJohn++;
-            } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("crunch") ) {
+                cptJohn++;
+            } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("crunch")) {
                 cptCrunch++;
-            }else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("conseil") ) {
+            } else if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("conseil")) {
                 cptConseil++;
             }
         }
- System.out.println("Nombre d'entrées de Capitaine Mitaine "+cptMitaine+"\nNombre d'"
-                + "entrées de Justin Bieber: "+cptBieber+"\nNombre d'entrées de John Deere"
-                        + ": "+cptJohn+"\nNombre d'entrées de Conseil: "
-                +cptConseil+"\nNombre d'entrées de Capitaine Crunch: "+cptCrunch);
+        System.out.println("Nombre d'entrées de Capitaine Mitaine " + cptMitaine + "\nNombre d'"
+                + "entrées de Justin Bieber: " + cptBieber + "\nNombre d'entrées de John Deere"
+                + ": " + cptJohn + "\nNombre d'entrées de Conseil: "
+                + cptConseil + "\nNombre d'entrées de Capitaine Crunch: " + cptCrunch);
 
     }
 
     private void afficherInfosPersonnes() {
         System.out.println("Informations sur les personnes: ");
-        for(int i=0;i<listePersonne.size();i++){
+        for (int i = 0; i < listePersonne.size(); i++) {
             System.out.println(listePersonne.get(i));
         }
     }
@@ -380,17 +380,22 @@ for (int i = 0; i < listeSpécimen.size(); i++) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
         }
         String ligne = lecture.readLine();
-
+        int ageint = 0;
         while (ligne != null) {
+
             String[] contenuLigne = ligne.split(";");
             contenuLigne[0] = codeAcces;
             contenuLigne[1] = mdp;
             contenuLigne[2] = nom;
             contenuLigne[3] = age;
-            int ageint = Integer.parseInt(age); //try catch à faire
-
+            try {
+                ageint = Integer.parseInt(age); //try catch à faire
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur de conversion de l'âge");
+            }
             Personne personne = new Personne(nom, codeAcces, mdp, ageint);
             listePersonne.add(personne);
+            ligne = lecture.readLine();
         }
         lecture.close();
 
