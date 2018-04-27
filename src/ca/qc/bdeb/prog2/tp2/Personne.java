@@ -56,7 +56,7 @@ private static int nbEntrées;
 
     @Override
     public String toString() {
-        return "Nom:"+nom+"Age: "+age+"Code accès: "+codeAcces;
+        return "Nom: "+nom+" Age: "+age+" Code accès: "+codeAcces;
     }
     
 

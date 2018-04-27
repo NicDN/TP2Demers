@@ -59,7 +59,7 @@ public class GestionPokedex {
         //boucle de validation du choix du menu
         while (erreur) {
 
-            System.out.println("Sassissez une des options suivantes:\n");
+            System.out.println("Saisissez une des options suivantes:\n");
             System.out.println("1- Consulter les spécimens déjà saisis\n2- Saisir "
                     + "un nouveau spécimen\n3- Modifier un spécimen\n4- Statistiques"
                     + "\n5- Quitter");
@@ -93,7 +93,8 @@ public class GestionPokedex {
         //étapes selon le choix
         switch (choix) {
             case 1://Consulter les spécimens déjà saisis
-                consulterSpécimensExistants();
+                sousMenuAfficher();
+
                 afficherMenu();
                 break;
             case 2://saisir un nouveau spécimen
@@ -193,7 +194,9 @@ public class GestionPokedex {
 
     private void statistiques() {
         afficherNbEntréesTypes();
+        System.out.println("");
         afficherNbEntréesPersonnes();
+        System.out.println("");
         afficherInfosPersonnes();
     }
 
@@ -233,7 +236,7 @@ public class GestionPokedex {
                 cptConseil++;
             }
         }
-        System.out.println("Nombre d'entrées de Capitaine Mitaine " + cptMitaine + "\nNombre d'"
+        System.out.println("Nombre d'entrées de Capitaine Mitaine: " + cptMitaine + "\nNombre d'"
                 + "entrées de Justin Bieber: " + cptBieber + "\nNombre d'entrées de John Deere"
                 + ": " + cptJohn + "\nNombre d'entrées de Conseil: "
                 + cptConseil + "\nNombre d'entrées de Capitaine Crunch: " + cptCrunch);
@@ -250,7 +253,8 @@ public class GestionPokedex {
     private void quitter() {
         sauvegarderFichierPokedex("pokedex.bin", listeSpécimen);
 
-        System.exit(choix);
+        System.exit(0);
+
     }
 
     private Spécimen ajouterSpécimen(Personne observateur) {
@@ -357,7 +361,8 @@ public class GestionPokedex {
             System.out.println("Fichier chargé");
             oos.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Le fichier " + fichier + " n'a pas été trouver dans la méthode charcherListePersonnes du main");
+            System.out.println("Le fichier " + fichier + " n'a pas été trouver "
+                    + "dans la méthode charcherListePersonnes du main. Il sera créée en sauvegardant");
 
         } catch (IOException e) {
             System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
@@ -384,10 +389,10 @@ public class GestionPokedex {
         while (ligne != null) {
 
             String[] contenuLigne = ligne.split(";");
-            contenuLigne[0] = codeAcces;
-            contenuLigne[1] = mdp;
-            contenuLigne[2] = nom;
-            contenuLigne[3] = age;
+            codeAcces = contenuLigne[0];
+            mdp = contenuLigne[1];
+            nom = contenuLigne[2];
+            age = contenuLigne[3];
             try {
                 ageint = Integer.parseInt(age); //try catch à faire
             } catch (NumberFormatException e) {
@@ -460,20 +465,21 @@ public class GestionPokedex {
         boolean erreurUtilisateur;
         int positionUtilisateur = 0;
         do {
-            erreurUtilisateur = false;
+            erreurUtilisateur = true;
             System.out.println("Entrez votre nom d'utilisateur");
             String nomUtilisateur = clavier.nextLine();
-            for (int position = 0; position < listePersonne.size() && erreurUtilisateur; position++) {
+            for (int position = 0; position < listePersonne.size(); position++) {
 
-                if (nomUtilisateur.equalsIgnoreCase(listePersonne.get(position).getCodeAcces())) {
+                if (nomUtilisateur.equals(listePersonne.get(position).getCodeAcces())) {
+
                     erreurUtilisateur = false;
                     positionUtilisateur = position;
 
-                } else {
-                    System.out.println("Votre nom d'utilisateur est inexistant");
-                    erreurUtilisateur = true;
                 }
 
+            }
+            if (erreurUtilisateur) {
+                System.out.println("Votre nom d'utilisateur est inexistant");
             }
         } while (erreurUtilisateur);
         String mdpDécrypté = décrypterMotDePasses(positionUtilisateur);
@@ -523,7 +529,6 @@ public class GestionPokedex {
     }
 
     private void consulterSpécimensExistants() {
-        triCroissantetDécroissant();
 
         String type = demanderType();
 
@@ -531,7 +536,7 @@ public class GestionPokedex {
         triAnimaux();
     }
 
-    private void triCroissantetDécroissant() {
+    private void triCroissantEtDécroissant() {
         Spécimen temp;
         int positionMin;
         boolean lettrePlusGrande = true;
@@ -660,6 +665,57 @@ public class GestionPokedex {
             erreur = true;
         }
         return erreur;
+    }
+
+    private void sousMenuAfficher() {
+        boolean erreur = true;
+        int choix = 0;
+        while (erreur) {
+
+            System.out.println("Saisissez une des options suivantes:\n");
+            System.out.println("1- Afficher en ordre croissant et décroissante\n2- Afficher par type de spécimen "
+                    + "\n3- Afficher les animaux\n4-Retour au menu\nFaites votre choix");
+
+            //Sasir une donné et essayer de la convertir en int
+            try {
+                choix = Integer.parseInt(clavier.nextLine());
+                //Validation de la donnée une fois convertie
+                if (choix <= 0 || choix >= 5) {
+                    System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
+                } else {
+                    //tout est beau, on sort de la boucle
+                    erreur = false;
+                }
+                //Exception d'une string vers un int
+            } catch (NumberFormatException e) {
+                System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
+                //Exception autre
+            } catch (Exception e) {
+                System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
+            }
+        }
+
+        optionMenuAfficher(choix);
+    }
+
+    private void optionMenuAfficher(int choix) {
+        switch (choix) {
+            case 1:
+                triCroissantEtDécroissant();
+                break;
+            case 2:
+                String type = demanderType();
+
+                triType(type);
+                break;
+            case 3:
+                triAnimaux();
+                break;
+            case 4:
+                afficherMenu();
+                break;
+        }
+
     }
 
 }
