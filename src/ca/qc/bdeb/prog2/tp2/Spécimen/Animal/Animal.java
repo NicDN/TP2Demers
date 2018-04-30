@@ -8,12 +8,13 @@ package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
 import ca.qc.bdeb.prog2.tp2.Spécimen.Spécimen;
+import java.io.Serializable;
 
 /**
  *
  * @author Nicolas
  */
-public abstract class Animal extends Spécimen{
+public abstract class Animal extends Spécimen implements Serializable{
     
     protected boolean estMale/*ou femmelle*/;
     protected String cri;

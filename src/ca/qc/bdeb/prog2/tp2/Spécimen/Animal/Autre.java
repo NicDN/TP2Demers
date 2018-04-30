@@ -6,6 +6,7 @@
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
+import java.io.Serializable;
 
 
 
@@ -13,11 +14,11 @@ import ca.qc.bdeb.prog2.tp2.Personne;
  *
  * @author Nicolas
  */
-public class Autre extends Animal {
+public class Autre extends Animal implements Serializable{
 
     public Autre ( boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille,Personne observateur) {
         super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille,observateur);
-        
+        this.type="autre";
     }
 
     @Override

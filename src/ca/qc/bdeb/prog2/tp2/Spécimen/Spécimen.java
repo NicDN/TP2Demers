@@ -17,6 +17,8 @@ import java.io.Serializable;
 public abstract class Spécimen implements Serializable {
 
     private static int numTransac=0;
+   protected  String type;
+    
 
     protected String dateObservation, nom, couleur;
     protected int quantiéObservé;
@@ -91,6 +93,10 @@ public void ajouterQuantitéObservé(int quantité){
 
     public Personne getObservateur() {
         return observateur;
+    }
+
+    public String getType() {
+        return type;
     }
 
 }

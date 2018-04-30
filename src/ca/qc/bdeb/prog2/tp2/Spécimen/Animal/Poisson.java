@@ -6,19 +6,21 @@
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
+import java.io.Serializable;
 
 
 /**
  *
  * @author Nicolas
  */
-public class Poisson extends Animal{
+public class Poisson extends Animal implements Serializable{
 
     private boolean estDansEauSalee/*ou dans l'eau douce*/;
 
     public Poisson(boolean estDansEauSalee, boolean estMale, String cri, String dateObservation, String nom, String couleur, int quantiéObservé, double taille,Personne observateur) {
         super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille,observateur);
         this.estDansEauSalee = estDansEauSalee;
+        this.type="poisson";
     }
 
     public boolean getisEstDansEauSalee() {

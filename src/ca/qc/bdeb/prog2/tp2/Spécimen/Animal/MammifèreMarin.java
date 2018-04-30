@@ -7,6 +7,7 @@
 package ca.qc.bdeb.prog2.tp2.Spécimen.Animal;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
+import java.io.Serializable;
 
 
 
@@ -14,7 +15,7 @@ import ca.qc.bdeb.prog2.tp2.Personne;
  *
  * @author Nicolas
  */
-public class MammifèreMarin extends Animal{
+public class MammifèreMarin extends Animal implements Serializable{
 
     private boolean estDansEauSalee/*ou dans l'eau douce*/, estCarnivore/*ou végétarien*/;
 
@@ -22,6 +23,7 @@ public class MammifèreMarin extends Animal{
         super(estMale, cri, dateObservation, nom, couleur, quantiéObservé, taille,observateur);
         this.estDansEauSalee = estDansEauSalee;
         this.estCarnivore = estCarnivore;
+        this.type="mammifère marin";
     }
 
     public boolean isEstCarnivore() {

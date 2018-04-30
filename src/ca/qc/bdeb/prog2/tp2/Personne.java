@@ -5,11 +5,13 @@
  */
 package ca.qc.bdeb.prog2.tp2;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Nicolas
  */
-public class Personne {
+public class Personne implements Serializable{
     private String nom,codeAcces,mdp;
     private int age;
 private static int nbEntrées; 

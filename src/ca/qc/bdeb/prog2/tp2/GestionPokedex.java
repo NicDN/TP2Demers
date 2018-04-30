@@ -32,6 +32,7 @@ public class GestionPokedex {
 
     Scanner clavier = new Scanner(System.in);
     int choix;
+    Personne observateur;
 
     public void démarrer() {
         try {
@@ -43,7 +44,7 @@ public class GestionPokedex {
         }
 
         try {
-            chargerFichierPokedex("pokedex.bin", listeSpécimen);
+            chargerFichierPokedex("pokedex.bin");
         } catch (ClassNotFoundException ex) {
 
         }
@@ -88,7 +89,6 @@ public class GestionPokedex {
     }
 
     private void optionMenu(int choix) {
-        Personne observateur = new Personne("", "", "", 1);//création d'une personne temporaire temporaire
 
         //étapes selon le choix
         switch (choix) {
@@ -98,7 +98,7 @@ public class GestionPokedex {
                 afficherMenu();
                 break;
             case 2://saisir un nouveau spécimen
-                listeSpécimen.add(ajouterSpécimen(observateur));
+                listeSpécimen.add(ajouterSpécimen());
                 afficherMenu();
                 break;
             case 3://modifier un spécimen
@@ -171,10 +171,23 @@ public class GestionPokedex {
         afficherListeType(type);
 
         //demande de la position de l'élément que l'utilisateur veut supprimmer
-        int élément = tryCatchInt("Quel élément voulez-vous supprimer? Saississez la position");
+        int élément;
+        boolean erreur = false;
+
+        do {
+
+            élément = tryCatchInt("Quel élément voulez-vous supprimer? Saississez la position");
+            try {
+                listeSpécimen.get(élément);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Mauvaise coordonnée");
+                erreur = true;
+            }
+
+        } while (erreur || élément > listeSpécimen.size() || !listeSpécimen.get(élément).getType().equals(type));
 
         listeSpécimen.remove(élément);
-        System.out.println((listeSpécimen.get(élément)).getNom() + " a été supprimé.");
+        System.out.println("Élément supprimé");
 
     }
 
@@ -182,12 +195,16 @@ public class GestionPokedex {
         String type = demanderType();
 
         afficherListeType(type);
-
-        int élément = tryCatchInt("Quel élément voulez-vous modifier? Saississez la position");
+        int élément;
+        System.out.println(listeSpécimen.size());
+        do {
+            élément = tryCatchInt("Quel élément voulez-vous modifier? Saississez la position");
+        } while (élément > listeSpécimen.size());
 
         int quantité = tryCatchInt("Quelle quantité de spécimen voulez-vous ajouter? ");
 
         listeSpécimen.get(élément).ajouterQuantitéObservé(quantité);
+
         System.out.println("La quantité observé à été modifié");
 
     }
@@ -222,6 +239,7 @@ public class GestionPokedex {
     }
 
     private void afficherNbEntréesPersonnes() {
+
         int cptMitaine = 0, cptBieber = 0, cptJohn = 0, cptConseil = 0, cptCrunch = 0;
         for (int i = 0; i < listeSpécimen.size(); i++) {
             if (listeSpécimen.get(i).getObservateur().getCodeAcces().equals("mitaine")) {
@@ -257,7 +275,7 @@ public class GestionPokedex {
 
     }
 
-    private Spécimen ajouterSpécimen(Personne observateur) {
+    private Spécimen ajouterSpécimen() {
         boolean erreur, estMale, estDansEauSalee, estCarnivore, estFlottante;
         String dateObservation, type, nom, couleur, cri;
         double taille = 0;
@@ -348,12 +366,13 @@ public class GestionPokedex {
             oos.flush();
             oos.close();
             System.out.println("Fichier sauvegardé");
-        } catch (IOException e) {
-            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
+        } catch (java.io.IOException e) {
+            System.out.println("Erreur entrée-sortie avec " + fichier + " " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void chargerFichierPokedex(String fichier, ArrayList<Spécimen> listeSpécimen) throws ClassNotFoundException {
+    public void chargerFichierPokedex(String fichier) throws ClassNotFoundException {
         try {
             FileInputStream fos = new FileInputStream(fichier);
             ObjectInputStream oos = new ObjectInputStream(fos);
@@ -362,10 +381,11 @@ public class GestionPokedex {
             oos.close();
         } catch (FileNotFoundException e) {
             System.out.println("Le fichier " + fichier + " n'a pas été trouver "
-                    + "dans la méthode charcherListePersonnes du main. Il sera créée en sauvegardant");
+            );
 
         } catch (IOException e) {
-            System.out.println("Erreur entrée-sortie avec " + fichier + " dans la méthode charcherListePersonnes du main");
+            System.out.println("Erreur entrée-sortie avec " + fichier + " " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -427,10 +447,12 @@ public class GestionPokedex {
             System.out.println("Saisissez le type d'entrée");
             type = clavier.nextLine();
             type.toLowerCase();
+//            String typeObjet=type.charAt(0)
 
             if (type.equals("poisson") || type.equals("mammifère marin") || type.equals("plante aquatique") || type.equals("minéral") || type.equals("autre")) {
                 erreur = false;
-            } else {
+            } //else if (listeSpécimen.contains(typeObjet) ==false) {} 
+            else {
                 System.out.println("Vous n'avez pas saisi un type valide!");
                 erreur = true;
             }
@@ -471,7 +493,7 @@ public class GestionPokedex {
             for (int position = 0; position < listePersonne.size(); position++) {
 
                 if (nomUtilisateur.equals(listePersonne.get(position).getCodeAcces())) {
-
+                    observateur = listePersonne.get(position);
                     erreurUtilisateur = false;
                     positionUtilisateur = position;
 
@@ -494,6 +516,7 @@ public class GestionPokedex {
             System.exit(0);
 
         }
+
         afficherMenu();
         return erreur;
     }

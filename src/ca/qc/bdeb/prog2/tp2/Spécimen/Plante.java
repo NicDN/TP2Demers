@@ -6,6 +6,7 @@
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
+import java.io.Serializable;
 
 
 
@@ -13,7 +14,7 @@ import ca.qc.bdeb.prog2.tp2.Personne;
  *
  * @author Nicolas
  */
-public class Plante extends Spécimen{
+public class Plante extends Spécimen implements Serializable{
     
     private boolean estFlottante/*ou immergée*/, estDansEauSalee/*ou dans l'eau douce*/;
 
@@ -21,6 +22,7 @@ public class Plante extends Spécimen{
         super(dateObservation, nom, couleur, quantiéObservé, taille,observateur);
         this.estFlottante = estFlottante;
         this.estDansEauSalee = estDansEauSalee;
+        this.type="plante";
     }
 
     public boolean isEstDansEauSalee() {
