@@ -36,7 +36,7 @@ public class MammifèreMarin extends Animal implements Serializable{
 
     @Override
     public String toString() {
-        return super.toString()+"eau salée: "+estDansEauSalee+" Carnivore: "+estCarnivore; 
+        return super.toString()+" eau salée: "+estDansEauSalee+" Carnivore: "+estCarnivore; 
     }
 
     

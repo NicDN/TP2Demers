@@ -36,7 +36,7 @@ public class GestionPokedex {
 
     public void démarrer() {
         try {
-            //les try catch ne sont pas bien fait, ils sont automatique
+            
 
             charcherListePersonnes("personnes.txt", listePersonne);
         } catch (IOException ex) {
@@ -49,136 +49,164 @@ public class GestionPokedex {
 
         }
         demanderIdentité();
-        //demander identité si réussi à trouver mdp on call la menu
-        //le menu doit être dans un while
+
     }
 
     public void afficherMenu() {
-
+        boolean continuer = true;
         boolean erreur = true;
+        while (continuer) {
+            
+            while (erreur) {
 
-        //boucle de validation du choix du menu
-        while (erreur) {
+                System.out.println("Saisissez une des options suivantes:\n");
+                System.out.println("1- Consulter les spécimens déjà saisis\n2- Saisir "
+                        + "un nouveau spécimen\n3- Modifier un spécimen\n4- Statistiques"
+                        + "\n5- Quitter");
 
-            System.out.println("Saisissez une des options suivantes:\n");
-            System.out.println("1- Consulter les spécimens déjà saisis\n2- Saisir "
-                    + "un nouveau spécimen\n3- Modifier un spécimen\n4- Statistiques"
-                    + "\n5- Quitter");
-
-            //Sasir une donné et essayer de la convertir en int
-            try {
-                choix = Integer.parseInt(clavier.nextLine());
-                //Validation de la donnée une fois convertie
-                if (choix <= 0 || choix >= 6) {
-                    System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
-                } else {
-                    //tout est beau, on sort de la boucle
-                    erreur = false;
+                
+                try {
+                    choix = Integer.parseInt(clavier.nextLine());
+                    
+                    if (choix <= 0 || choix >= 6) {
+                        System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
+                    } else {
+                       
+                        erreur = false;
+                    }
+                    
+                } catch (NumberFormatException e) {
+                    System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
+                   
+                } catch (Exception e) {
+                    System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
                 }
-                //Exception d'une string vers un int
-            } catch (NumberFormatException e) {
-                System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
-                //Exception autre
-            } catch (Exception e) {
-                System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
             }
+            erreur = true;
+            
+            continuer = optionMenu(choix);
         }
-
-        //méthode qui trète l'obtion de l'utilisateur
-        optionMenu(choix);
     }
 
-    private void optionMenu(int choix) {
+    private boolean optionMenu(int choix) {
 
-        //étapes selon le choix
+       
+        boolean recommencer = false;
         switch (choix) {
-            case 1://Consulter les spécimens déjà saisis
+            case 1:
                 sousMenuAfficher();
 
-                afficherMenu();
+                recommencer = true;
                 break;
-            case 2://saisir un nouveau spécimen
+            case 2:
                 listeSpécimen.add(ajouterSpécimen());
-                afficherMenu();
+                recommencer = true;
                 break;
-            case 3://modifier un spécimen
+            case 3:
                 sousMenuModifier();
-                afficherMenu();
+                recommencer = true;
                 break;
-            case 4://statistiques
+            case 4:
                 statistiques();
-                afficherMenu();
+                recommencer = true;
                 break;
-            case 5://quitter
+            case 5:
                 quitter();
+                recommencer = false;
                 break;
 
         }
+        return recommencer;
     }
 
     private void sousMenuModifier() {
         boolean erreur = true;
+        boolean continuer = true;
+        while (continuer) {
+            while (erreur) {
 
-        while (erreur) {
+                System.out.println("Sassissez une des options suivantes:\n");
+                System.out.println("1-Supprimer un spécimen\n2-Modifier la quantité "
+                        + "aperçue d'un spécimen donné\n3-Retourner au menu principal");
 
-            System.out.println("Sassissez une des options suivantes:\n");
-            System.out.println("1-Supprimer un spécimen\n2-Modifier la quantité "
-                    + "aperçue d'un spécimen donné\n3-Retourner au menu principal");
-
-            //Sasir une donné et essayer de la convertir en int
-            try {
-                choix = Integer.parseInt(clavier.nextLine());
-                //Validation de la donnée une fois convertie
-                if (choix <= 0 || choix >= 4) {
-                    System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
-                } else {
-                    erreur = false;
+                //Sasir une donné et essayer de la convertir en int
+                try {
+                    choix = Integer.parseInt(clavier.nextLine());
+                    //Validation de la donnée une fois convertie
+                    if (choix <= 0 || choix >= 4) {
+                        System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
+                    } else {
+                        erreur = false;
+                    }
+                    //Exception d'une string vers un int
+                } catch (NumberFormatException e) {
+                    System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
+                    //Exception autre
+                } catch (Exception e) {
+                    System.out.println("Exeption autre dans classe GestionPokedex, méthode sousMenuModifier");
                 }
-                //Exception d'une string vers un int
-            } catch (NumberFormatException e) {
-                System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
-                //Exception autre
-            } catch (Exception e) {
-                System.out.println("Exeption autre dans classe GestionPokedex, méthode sousMenuModifier");
             }
+            erreur = true;
+            continuer = optionMenuModifier(choix);
         }
-        optionMenuModifier(choix);
     }
 
-    private void optionMenuModifier(int choix) {
+    private boolean optionMenuModifier(int choix) {
+        boolean recommencer = false;
         switch (choix) {
             case 1:
                 supprimerSpecimen();
-                sousMenuModifier();
+                recommencer = true;
                 break;
             case 2:
                 modifierQuantitéApercu();
-                sousMenuModifier();
+                recommencer = true;
                 break;
             case 3:
-                afficherMenu();
+                recommencer = false;
                 break;
 
         }
+        return recommencer;
     }
 
     private void supprimerSpecimen() {
         //variable type représente le type de spécimen
         //méthode demander type demande a l'utilisateur de saisir un type de spécimen
-        String type = demanderType();
+        boolean erreur = true;
+        String type;
+        do {
+            if (listeSpécimen.size() == 0) {
+                System.out.println("La liste est vide");
+                return;
+            }
+
+            type = demanderType();
+            for (int i = 0; i < listeSpécimen.size() && erreur; i++) {
+                if (listeSpécimen.get(i).getType().equals(type)) {
+                    erreur = false;
+                } else {
+                    erreur = true;
+
+                }
+            }
+            if (erreur) {
+                System.out.println("Il n'y a pas de spécimen de ce type");
+            }
+        } while (erreur);
 
         //affichage de la liste du type de spécimen choisi
         afficherListeType(type);
 
         //demande de la position de l'élément que l'utilisateur veut supprimmer
         int élément;
-        boolean erreur = false;
 
         do {
 
             élément = tryCatchInt("Quel élément voulez-vous supprimer? Saississez la position");
             try {
                 listeSpécimen.get(élément);
+                erreur = false;
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Mauvaise coordonnée");
                 erreur = true;
@@ -271,8 +299,7 @@ public class GestionPokedex {
     private void quitter() {
         sauvegarderFichierPokedex("pokedex.bin", listeSpécimen);
 
-        System.exit(0);
-
+//        System.exit(0);
     }
 
     private Spécimen ajouterSpécimen() {
@@ -533,7 +560,7 @@ public class GestionPokedex {
         return mdpDécrypté;
     }
 
-    //métode qui converti un string en int avec une boucle de validation
+    
     private int tryCatchInt(String messageAUtilisateur) {
         boolean erreur;
         int choixUtilisateur = 0;
@@ -596,13 +623,25 @@ public class GestionPokedex {
 
         System.out.println("\n\nTous les spécimens enregistrés, classés en ordre décroissant\n");
 
-        for (int i = 0; i < pileSpécimen.size(); i++) {
+        for (int i = 0; pileSpécimen.size() != 0; i++) {
             System.out.println(pileSpécimen.pop());
         }
 
     }
 
     private void triType(String type) {
+        boolean erreur = true;
+        for (int i = 0; i < listeSpécimen.size() && erreur; i++) {
+            if (listeSpécimen.get(i).getType().equals(type)) {
+                erreur = false;
+            } else {
+                erreur = true;
+            }
+        }
+        if (erreur) {
+            System.out.println("La liste ne contient pas d'élément du type demandé");
+        }
+
         Spécimen temp;
         boolean lettrePlusGrande = true;
 
@@ -693,51 +732,60 @@ public class GestionPokedex {
     private void sousMenuAfficher() {
         boolean erreur = true;
         int choix = 0;
-        while (erreur) {
+        boolean recommencer = true;
+        while (recommencer) {
+            while (erreur) {
 
-            System.out.println("Saisissez une des options suivantes:\n");
-            System.out.println("1- Afficher en ordre croissant et décroissante\n2- Afficher par type de spécimen "
-                    + "\n3- Afficher les animaux\n4-Retour au menu\nFaites votre choix");
+                System.out.println("Saisissez une des options suivantes:\n");
+                System.out.println("1- Afficher en ordre croissant et décroissante\n2- Afficher par type de spécimen "
+                        + "\n3- Afficher les animaux\n4-Retour au menu\nFaites votre choix");
 
-            //Sasir une donné et essayer de la convertir en int
-            try {
-                choix = Integer.parseInt(clavier.nextLine());
-                //Validation de la donnée une fois convertie
-                if (choix <= 0 || choix >= 5) {
-                    System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
-                } else {
-                    //tout est beau, on sort de la boucle
-                    erreur = false;
+                //Sasir une donné et essayer de la convertir en int
+                try {
+                    choix = Integer.parseInt(clavier.nextLine());
+                    //Validation de la donnée une fois convertie
+                    if (choix <= 0 || choix >= 5) {
+                        System.out.println("Le numéro que vous avez saisie n'est pas valide, veuillez réessayer.");
+                    } else {
+                        //tout est beau, on sort de la boucle
+                        erreur = false;
+                    }
+                    //Exception d'une string vers un int
+                } catch (NumberFormatException e) {
+                    System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
+                    //Exception autre
+                } catch (Exception e) {
+                    System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
                 }
-                //Exception d'une string vers un int
-            } catch (NumberFormatException e) {
-                System.out.println("Vous n'avez pas rentrer un nombre, veuillez réessayer.");
-                //Exception autre
-            } catch (Exception e) {
-                System.out.println("Exeption autre dans classe GestionPokedex, méthode afficherMenu");
             }
+            erreur = true;
+            recommencer = optionMenuAfficher(choix);
         }
-
-        optionMenuAfficher(choix);
     }
 
-    private void optionMenuAfficher(int choix) {
+    private boolean optionMenuAfficher(int choix) {
+        boolean recommencer = false;
         switch (choix) {
             case 1:
                 triCroissantEtDécroissant();
+                recommencer = true;
                 break;
+
             case 2:
                 String type = demanderType();
 
                 triType(type);
+                recommencer = true;
                 break;
             case 3:
                 triAnimaux();
+                recommencer = true;
                 break;
             case 4:
-                afficherMenu();
+                recommencer = false;
                 break;
         }
+        return recommencer;
 
     }
 

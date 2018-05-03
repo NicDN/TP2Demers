@@ -85,7 +85,7 @@ public abstract class Spécimen implements Serializable {
 
     @Override
     public String toString() {
-        return dateObservation+" "+ nom+" "+ couleur+" "+quantiéObservé+" "+taille+" "+observateur;
+        return "Date d'observation: "+dateObservation+" Nom: "+ nom+" Couleur: "+ couleur+" Quantité observé "+quantiéObservé+" Taille: "+taille+" Informations sur l'observateur: "+observateur+" Infomations particulières selon le type: ";
     }
 public void ajouterQuantitéObservé(int quantité){
     quantiéObservé=quantiéObservé+quantité;
