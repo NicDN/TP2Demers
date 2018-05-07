@@ -6,8 +6,8 @@
 package ca.qc.bdeb.prog2.tp2;
 
 /**
- *
- * @author Nicolas
+ * 
+ * @author Hadrien Guimond et Nicolas Demers
  */
 public class main {
 
