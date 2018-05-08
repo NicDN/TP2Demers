@@ -361,8 +361,8 @@ public class GestionPokedex {
                 for (int k = 0; k < listeSpécimen.get(j).getNom().length()
                         && k < listeSpécimen.get(i).getNom().length() && lettrePlusGrande; k++) {
 
-                    if (listeSpécimen.get(j).getNom().charAt(k)
-                            < listeSpécimen.get(positionMin).getNom().charAt(k)) {
+                    if (listeSpécimen.get(j).getNom().toLowerCase().charAt(k)
+                            < listeSpécimen.get(positionMin).getNom().toLowerCase().charAt(k)) {
                         positionMin = j;
                         lettrePlusGrande = false;
                     }
@@ -417,8 +417,8 @@ public class GestionPokedex {
                 for (int k = 0; k < listeSpécimen.get(recherche).getNom().length()
                         && k < listeSpécimen.get(position).getNom().length() && lettrePlusGrande; k++) {
 
-                    if (listeSpécimen.get(recherche).getNom().charAt(k)
-                            > listeSpécimen.get(recherche + 1).getNom().charAt(k)) {
+                    if (listeSpécimen.get(recherche).getNom().toLowerCase().charAt(k)
+                            > listeSpécimen.get(recherche + 1).getNom().toLowerCase().charAt(k)) {
                         temp = listeSpécimen.get(recherche);
                         listeSpécimen.set(recherche, listeSpécimen.get(recherche + 1));
                         listeSpécimen.set(recherche + 1, temp);
