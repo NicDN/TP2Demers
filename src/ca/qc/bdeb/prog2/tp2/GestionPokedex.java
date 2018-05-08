@@ -432,7 +432,7 @@ public class GestionPokedex {
             if (type.equals("poisson") && ((listeSpécimen.get(i)) instanceof Poisson)) {
                 System.out.println(listeSpécimen.get(i));
 
-            } else if (type.equals("mammifère marin") && ((listeSpécimen.get(i)) instanceof MammifèreMarin)) {
+            } else if (type.equals("mammifere marin") && ((listeSpécimen.get(i)) instanceof MammifèreMarin)) {
                 System.out.println(listeSpécimen.get(i));
 
             } else if (type.equals("plante aquatique") && ((listeSpécimen.get(i)) instanceof Plante)) {
@@ -734,7 +734,7 @@ public class GestionPokedex {
         System.out.println("Nombre d'entrées de plante " + cptPlante + "\nNombre d'"
                 + "entrées de poisson: " + cptPoisson + "\nNombre d'entrées de minér"
                 + "al: " + cptMinéral + "\nNombre d'entrées de autre: "
-                + cptAutre + "\nNombre d'entrées de mammifère marin: " + cptMammifère);
+                + cptAutre + "\nNombre d'entrées de mammifere marin: " + cptMammifère);
     }
 
     /**
@@ -860,7 +860,7 @@ public class GestionPokedex {
             if (type.equals("poisson") && ((listeSpécimen.get(i)) instanceof Poisson)) {
                 System.out.println(listeSpécimen.get(i));
                 System.out.println("Élément numéro " + i + " dans la liste");
-            } else if (type.equals("mammifère marin") && ((listeSpécimen.get(i)) instanceof MammifèreMarin)) {
+            } else if (type.equals("mammifere marin") && ((listeSpécimen.get(i)) instanceof MammifèreMarin)) {
                 System.out.println(listeSpécimen.get(i));
                 System.out.println("Élément numéro " + i + " dans la liste");
             } else if (type.equals("plante aquatique") && ((listeSpécimen.get(i)) instanceof Plante)) {
