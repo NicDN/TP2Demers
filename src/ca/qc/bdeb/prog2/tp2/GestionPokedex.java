@@ -548,7 +548,7 @@ public class GestionPokedex {
                 spécimen = new Poisson(estDansEauSalee, estMale, cri, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
 
-            case "mammifère marin":
+            case "mammifere marin":
                 estMale = demanderBoolean("male", "femelle");
                 cri = demanderCri();
                 estDansEauSalee = demanderBoolean("Eau salée", "eau douce");
@@ -562,7 +562,7 @@ public class GestionPokedex {
                 spécimen = new Plante(estFlottante, estDansEauSalee, dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
 
-            case "minéral":
+            case "mineral":
                 spécimen = new Minéral(dateObservation, nom, couleur, quantitéObservé, taille, observateur);
                 break;
 
@@ -839,7 +839,7 @@ public class GestionPokedex {
             type = clavier.nextLine();
             type.toLowerCase();
 
-            if (type.equals("poisson") || type.equals("mammifère marin") || type.equals("plante aquatique") || type.equals("minéral") || type.equals("autre")) {
+            if (type.equals("poisson") || type.equals("mammifere marin") || type.equals("plante aquatique") || type.equals("mineral") || type.equals("autre")) {
                 erreur = false;
             } else {
                 System.out.println("Vous n'avez pas saisi un type valide!");

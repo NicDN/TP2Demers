@@ -1,27 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.qc.bdeb.prog2.tp2;
 
 import java.io.Serializable;
 
 /**
+ * Classe Personne
  *
- * @author Nicolas
+ * @author Hadrien Guimond et Nicolas Demers
+ * @version finale
  */
-public class Personne implements Serializable{
-    private String nom,codeAcces,mdp;
-    private int age;
-private static int nbEntrées; 
+public class Personne implements Serializable {
 
+    private String nom, codeAcces, mdp;
+    private int age;
+    private static int nbEntrées;
+
+    /**
+     * Constructeur de la classe Personne
+     *
+     * @param nom vrai nom de la personne
+     * @param codeAcces pseudonyme de la personne
+     * @param mdp mot de passe encrypté de la personne
+     * @param age age de la personne
+     */
     public Personne(String nom, String codeAcces, String mdp, int age) {
         this.nom = nom;
         this.codeAcces = codeAcces;
         this.mdp = mdp;
         this.age = age;
-        
+
     }
 
     public int getAge() {
@@ -58,14 +64,7 @@ private static int nbEntrées;
 
     @Override
     public String toString() {
-        return "Nom: "+nom+" Age: "+age+" Code accès: "+codeAcces;
+        return "Nom: " + nom + " Age: " + age + " Code accès: " + codeAcces;
     }
-    
 
-    
-    
-    
-    
-    
-    
 }

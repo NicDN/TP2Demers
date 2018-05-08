@@ -1,37 +1,43 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.qc.bdeb.prog2.tp2.Spécimen;
 
 import ca.qc.bdeb.prog2.tp2.Personne;
 import java.io.Serializable;
 
-
 /**
+ * Classe Spécimen
  *
- * @author Nicolas
+ * @author Hadrien Guimond et Nicolas Demers
+ * @version finale
  */
 public abstract class Spécimen implements Serializable {
 
-    private static int numTransac=0;
-   protected  String type;
-    
+    private static int numTransac = 0;
+    protected String type;
 
     protected String dateObservation, nom, couleur;
     protected int quantiéObservé;
-    protected double taille/*taille du spécimen*/;
+    protected double taille;
     protected Personne observateur;
 
+    /**
+     * Contructeur de la classe Spécimen
+     *
+     * @param dateObservation numéro à 8 chiffres de la date observée
+     * année/mois/jour
+     * @param nom nom du spécimen
+     * @param couleur couleur du spécimen
+     * @param quantiéObservé quantité observé d'un même spécimen
+     * @param taille taille du spécimen
+     * @param observateur personne qui à observée/entrée dans le pokedex le
+     * spécimen
+     */
     public Spécimen(String dateObservation, String nom, String couleur, int quantiéObservé, double taille, Personne observateur) {
         this.dateObservation = dateObservation;
         this.nom = nom;
         this.couleur = couleur;
         this.quantiéObservé = quantiéObservé;
         this.taille = taille;
-        this.observateur=observateur;
+        this.observateur = observateur;
         numTransac++;
     }
 
@@ -50,8 +56,6 @@ public abstract class Spécimen implements Serializable {
     public static int getNumTransac() {
         return numTransac;
     }
-
- 
 
     public int getQuantiéObservé() {
         return quantiéObservé;
@@ -73,8 +77,6 @@ public abstract class Spécimen implements Serializable {
         this.nom = nom;
     }
 
-
-
     public void setQuantiéObservé(int quantiéObservé) {
         this.quantiéObservé = quantiéObservé;
     }
@@ -85,11 +87,12 @@ public abstract class Spécimen implements Serializable {
 
     @Override
     public String toString() {
-        return "Date d'observation: "+dateObservation+" Nom: "+ nom+" Couleur: "+ couleur+" Quantité observé "+quantiéObservé+" Taille: "+taille+" Informations sur l'observateur: "+observateur+" Infomations particulières selon le type: ";
+        return "Date d'observation: " + dateObservation + " Nom: " + nom + " Couleur: " + couleur + " Quantité observé " + quantiéObservé + " Taille: " + taille + " Informations sur l'observateur: " + observateur + " Infomations particulières selon le type: ";
     }
-public void ajouterQuantitéObservé(int quantité){
-    quantiéObservé=quantiéObservé+quantité;
-}
+
+    public void ajouterQuantitéObservé(int quantité) {
+        quantiéObservé = quantiéObservé + quantité;
+    }
 
     public Personne getObservateur() {
         return observateur;
@@ -100,4 +103,3 @@ public void ajouterQuantitéObservé(int quantité){
     }
 
 }
-
