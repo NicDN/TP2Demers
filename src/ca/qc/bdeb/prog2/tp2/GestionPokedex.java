@@ -349,7 +349,7 @@ public class GestionPokedex {
     private void triCroissantEtDécroissant() {
         Spécimen temp;
         int positionMin;
-        boolean lettrePlusGrande = true;
+
         Stack<Spécimen> pileSpécimen = new Stack();
 
         for (int i = 0; i < listeSpécimen.size() - 1; i++) {
@@ -358,14 +358,10 @@ public class GestionPokedex {
 
             for (int j = i + 1; j < listeSpécimen.size(); j++) {
 
-                for (int k = 0; k < listeSpécimen.get(j).getNom().length()
-                        && k < listeSpécimen.get(i).getNom().length() && lettrePlusGrande; k++) {
+                if (listeSpécimen.get(j).getNom().toLowerCase().charAt(0)
+                        > listeSpécimen.get(positionMin).getNom().toLowerCase().charAt(0)) {
+                    positionMin = j;
 
-                    if (listeSpécimen.get(j).getNom().toLowerCase().charAt(k)
-                            < listeSpécimen.get(positionMin).getNom().toLowerCase().charAt(k)) {
-                        positionMin = j;
-                        lettrePlusGrande = false;
-                    }
                 }
 
             }
@@ -376,7 +372,7 @@ public class GestionPokedex {
 
         System.out.println("Tous les spécimens enregistrés, classés en ordre croissant\n");
 
-        for (int i = 0; i < listeSpécimen.size(); i++) {
+        for (int i = listeSpécimen.size() - 1; i >= 0; i--) {
             System.out.println(listeSpécimen.get(i));
             pileSpécimen.push(listeSpécimen.get(i));
         }
@@ -408,23 +404,19 @@ public class GestionPokedex {
         }
 
         Spécimen temp;
-        boolean lettrePlusGrande = true;
 
         for (int position = listeSpécimen.size() - 1; position >= 0; position--) {
 
             for (int recherche = 0; recherche <= position - 1; recherche++) {
 
-                for (int k = 0; k < listeSpécimen.get(recherche).getNom().length()
-                        && k < listeSpécimen.get(position).getNom().length() && lettrePlusGrande; k++) {
+                if (listeSpécimen.get(recherche).getNom().toLowerCase().charAt(0)
+                        > listeSpécimen.get(recherche + 1).getNom().toLowerCase().charAt(0)) {
+                    temp = listeSpécimen.get(recherche);
+                    listeSpécimen.set(recherche, listeSpécimen.get(recherche + 1));
+                    listeSpécimen.set(recherche + 1, temp);
 
-                    if (listeSpécimen.get(recherche).getNom().toLowerCase().charAt(k)
-                            > listeSpécimen.get(recherche + 1).getNom().toLowerCase().charAt(k)) {
-                        temp = listeSpécimen.get(recherche);
-                        listeSpécimen.set(recherche, listeSpécimen.get(recherche + 1));
-                        listeSpécimen.set(recherche + 1, temp);
-                        lettrePlusGrande = false;
-                    }
                 }
+
             }
         }
 
@@ -463,14 +455,10 @@ public class GestionPokedex {
 
             for (int j = i + 1; j < listeSpécimen.size(); j++) {
 
-                for (int k = 0; k < listeSpécimen.get(j).getDateObservation().length()
-                        && k < listeSpécimen.get(i).getDateObservation().length() && chiffrePlusGrande; k++) {
+                if (listeSpécimen.get(j).getDateObservation().toLowerCase().charAt(0)
+                        < listeSpécimen.get(positionMin).getDateObservation().toLowerCase().charAt(0)) {
+                    positionMin = j;
 
-                    if (listeSpécimen.get(j).getDateObservation().charAt(k)
-                            < listeSpécimen.get(positionMin).getDateObservation().charAt(k)) {
-                        positionMin = j;
-                        chiffrePlusGrande = false;
-                    }
                 }
 
             }
@@ -827,7 +815,7 @@ public class GestionPokedex {
 
     /**
      * Méthode qui demande quel type de spécimen a l'utilisateur
-     * 
+     *
      * @return le spécimen en lowercase saisi par l'utilisateur
      */
     private String demanderType() {
@@ -850,8 +838,8 @@ public class GestionPokedex {
     }
 
     /**
-     *Méthode qui affiche tous les spécimen d'un certain type
-     * 
+     * Méthode qui affiche tous les spécimen d'un certain type
+     *
      * @param type Type de spécimen à afficher
      */
     private void afficherListeType(String type) {
@@ -878,6 +866,7 @@ public class GestionPokedex {
 
     /**
      * Méthode qui transforme un String saisi au clavier en int
+     *
      * @param messageAUtilisateur Message de saisi pour l'utilisateur
      * @return le int transormer du string
      */
