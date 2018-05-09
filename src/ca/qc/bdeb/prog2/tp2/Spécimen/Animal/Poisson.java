@@ -42,7 +42,7 @@ public class Poisson extends Animal implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + " eau salée: " + estDansEauSalee;
+        return super.toString() + "\teau salée: " + estDansEauSalee;
     }
 
 }

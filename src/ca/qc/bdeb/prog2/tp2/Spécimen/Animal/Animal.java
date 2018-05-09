@@ -49,7 +49,7 @@ public abstract class Animal extends Spécimen implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + " male: " + estMale + " son cri: " + cri;
+        return super.toString() + "\tmale: " + estMale + "\tson cri: " + cri;
     }
 
 }

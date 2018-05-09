@@ -64,7 +64,7 @@ public class Personne implements Serializable {
 
     @Override
     public String toString() {
-        return "Nom: " + nom + " Age: " + age + " Code accès: " + codeAcces;
+        return "\tNom: " + nom + "\tAge: " + age + "\tCode accès: " + codeAcces;
     }
 
 }

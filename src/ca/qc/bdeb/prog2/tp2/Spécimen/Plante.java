@@ -44,7 +44,7 @@ public class Plante extends Spécimen implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + " flottante: " + estFlottante + " eauSalée: " + estDansEauSalee;
+        return super.toString() + "\tflottante: " + estFlottante + "\teauSalée: " + estDansEauSalee;
     }
 
 }
